@@ -1,25 +1,25 @@
 class ElasticSearchQuery
 
-	# geo queries
-  def append_geo_range_query(key, min_value = nil, max_value = nil, lat, lon)
-    if min_value.nil? && max_value && max_value.to_f > 0
-      append_geo_distance_filter_query(key, lat, lon, (max_value.to_f/1000.0).to_s + "km")
-    elsif min_value && max_value.nil? &&  min_value.to_f > 0
-      bool_filter_structure = get_bool_filter_structure
-      bool_filter_structure[:bool][:must_not].push(get_geo_query key, latitude, longitude, (min_value.to_f/1000.0).to_s + "km")
-      build_query_hash(bool_filter_structure)
-    elsif max_value && min_value
-      bool_filter_structure = get_bool_filter_structure
-      bool_filter_structure[:bool][:must].push(get_geo_query key, latitude, longitude, (max_value.to_f/1000.0).to_s + "km") if  max_value.to_f > 0
-      bool_filter_structure[:bool][:must_not].push(get_geo_query key, latitude, longitude, (min_value.to_f/1000.0).to_s + "km") if  min_value.to_f > 0
-      build_query_hash(bool_filter_structure)
-    end
-    return self
-  end
+	# # geo queries
+ #  def append_geo_range_filter_query(field, min_value, max_value, latitude, longitude)
+ #    bool_filter_structure = get_bool_filter_structure        
+ #    if min_value.blank? && max_value.present? && max_value.to_f > 0
+ #      bool_filter_structure[:bool][:must].push(get_geo_query field, latitude, longitude, (max_value.to_f/1000.0).to_s + "km")
+ #      build_filter_hash(field, bool_filter_structure)
+ #    elsif min_value.present? && max_value.blank? && min_value.to_f > 0
+ #      bool_filter_structure[:bool][:must_not].push(get_geo_query field, latitude, longitude, (min_value.to_f/1000.0).to_s + "km")
+ #      build_filter_hash(field, bool_filter_structure)
+ #    elsif max_value.present? && min_value.present?
+ #      bool_filter_structure[:bool][:must_not].push(get_geo_query field, latitude, longitude, (min_value.to_f/1000.0).to_s + "km") if min_value.to_f > 0
+ #      bool_filter_structure[:bool][:must].push(get_geo_query field, latitude, longitude, (max_value.to_f/1000.0).to_s + "km") if max_value.to_f > 0
+ #      build_filter_hash(field, bool_filter_structure)
+ #    end
+ #    return self
+ #  end
 
-  def get_geo_query key, latitude, longitude, radius, cache_flag = false
-    {geo_distance: {key => {lat: latitude.to_f, lon: longitude.to_f}, distance: radius, distance_type: :arc}}
-  end
+ #  def get_geo_query key, latitude, longitude, radius, cache_flag = false
+ #    {geo_distance: {key => {lat: latitude.to_f, lon: longitude.to_f}, distance: radius, distance_type: :arc}}
+ #  end
 
 
 
@@ -307,25 +307,25 @@ class ElasticSearchQuery
     }
   end
 
-  def must_entity_filter(polygon_filter, establishment_filter, developer_filter, building_filter)
-      bool_filter_structure = get_bool_filter_structure
-      bool_filter_structure[:bool][:must].push(polygon_filter)
-      bool_filter_structure[:bool][:must].push(establishment_filter)
-      bool_filter_structure[:bool][:must].push(developer_filter)
-      bool_filter_structure[:bool][:must].push(building_filter)
-      bool_filter_structure[:bool][:must].compact!
-      bool_filter_structure
-  end
+ #  def must_entity_filter(polygon_filter, establishment_filter, developer_filter, building_filter)
+ #    bool_filter_structure = get_bool_filter_structure
+ #    bool_filter_structure[:bool][:must].push(polygon_filter)
+ #    bool_filter_structure[:bool][:must].push(establishment_filter)
+ #    bool_filter_structure[:bool][:must].push(developer_filter)
+ #    bool_filter_structure[:bool][:must].push(building_filter)
+ #    bool_filter_structure[:bool][:must].compact!
+ #    bool_filter_structure
+ #  end
 
-  def should_entity_filter(polygon_filter, establishment_filter, developer_filter, building_filter)
-    bool_filter_structure = get_bool_filter_structure
-    bool_filter_structure[:bool][:should].push(polygon_filter)
-    bool_filter_structure[:bool][:should].push(establishment_filter)
-    bool_filter_structure[:bool][:should].push(developer_filter)
-    bool_filter_structure[:bool][:should].push(building_filter)
-    bool_filter_structure[:bool][:should].compact!
-    bool_filter_structure
-	end
+ #  def should_entity_filter(polygon_filter, establishment_filter, developer_filter, building_filter)
+ #    bool_filter_structure = get_bool_filter_structure
+ #    bool_filter_structure[:bool][:should].push(polygon_filter)
+ #    bool_filter_structure[:bool][:should].push(establishment_filter)
+ #    bool_filter_structure[:bool][:should].push(developer_filter)
+ #    bool_filter_structure[:bool][:should].push(building_filter)
+ #    bool_filter_structure[:bool][:should].compact!
+ #    bool_filter_structure
+	# end
 
 	def get_ids_filter_query ids
     ids_query_structure = get_ids_query_structure

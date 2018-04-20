@@ -5,5 +5,6 @@ Gem::Specification.new do |s|
   s.authors     = ["Mohib Yousuf"]
   s.email       = 'mohib.yousuf@proptiger.com'
   s.files       = Dir["lib/*"]
-  s.add_dependency "rails", ">= 4.0.2"	
+  s.add_dependency "rails", ">= 4.0.2"
+  s.add_dependency "elasticsearch"	
 end

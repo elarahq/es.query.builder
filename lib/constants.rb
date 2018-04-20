@@ -1,3 +1,3 @@
 module Constants
-	BULK_INDEX_SIZE = 500
+	MAX_BULK_INDEX_SIZE = 500
 end

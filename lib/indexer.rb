@@ -52,7 +52,7 @@ class Indexer
   def check_bulk_index_params(data)
   	raise "Please provide and array of documents" unless data.is_a?(Array)
   	count = data.size
-  	raise "Record count should be less than #{Constants::BULK_INDEX_SIZE}" if Constants::BULK_INDEX_SIZE
+  	raise "Record count should be less than #{Constants::MAX_BULK_INDEX_SIZE}" if Constants::MAX_BULK_INDEX_SIZE
   end
 
 end
