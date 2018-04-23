@@ -7,7 +7,7 @@ class FetchEsData
 		@search_port = search_port
 	end
 
-	
+
 	# fetches data from elastic search  
 	def fetch_shortlisted_data_from_es(query, index_name, type_name, extension = '_search')
 		uri = URI("http://#{@search_host}:#{@search_port}/#{index_name}/#{type_name}/#{extension}")

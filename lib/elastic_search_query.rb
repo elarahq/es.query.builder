@@ -254,7 +254,7 @@ class ElasticSearchQuery
     }
   end
 
-	def self.get_ids_filter_query ids
+  def self.get_ids_filter_query ids
     ids_query_structure = get_ids_query_structure
     ids_query_structure[:ids][:values] = ids
     ids_query_structure
