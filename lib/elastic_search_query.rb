@@ -3,6 +3,7 @@ class ElasticSearchQuery
 
 	#### All Get Query ================================================================
 
+  # returns the structure fot ids matching
   def self.get_ids_query_structure
     {
       :ids => {
@@ -11,6 +12,7 @@ class ElasticSearchQuery
     }
   end
 
+  # returns constant score filter structure
   def self.get_constant_score_filter_structure filter = {}, boost = 1
     {
       :constant_score => {
@@ -20,6 +22,7 @@ class ElasticSearchQuery
     }
   end
 
+  # returns constant score query structure
   def self.get_constant_score_query_structure query = {}, boost = 1
     {
       constant_score: {
@@ -33,6 +36,7 @@ class ElasticSearchQuery
     }
    end
 
+  # returns exists filter
   def self.get_exists_filter field
     {
       constant_score: {
@@ -45,7 +49,8 @@ class ElasticSearchQuery
     }
   end
 
-  #With Elasticsearch 6.1 nested filter has been replaced with nested query
+  # With Elasticsearch 6.1 nested filter has been replaced with nested query
+  # nested filter structure
   def self.get_nested_filter_structure
     {
       :nested => {
@@ -55,6 +60,7 @@ class ElasticSearchQuery
     }
   end
 
+  # nested query structure
   def self.get_nested_query_structure
     {
       :nested => {
@@ -64,6 +70,7 @@ class ElasticSearchQuery
     }
   end
 
+  # term filter query
   def self.get_term_filter_query(field, value, cache_flag = false)
     {
       term: {
@@ -72,6 +79,7 @@ class ElasticSearchQuery
     }
   end
 
+  # term boost query
   def self.get_term_boost_query field, value, boost
     {
       :term => {
@@ -83,6 +91,7 @@ class ElasticSearchQuery
     }
   end
 
+  # returns terms_filter_query
   def self.get_terms_filter_query(field, value)
       raise "Cannot append terms query to #{value} which is not an array" unless value.is_a?(Array)
       {
@@ -92,6 +101,7 @@ class ElasticSearchQuery
       }
   end
 
+  # returns filtered_structure
   def self.get_filtered_structure
     {
       bool: {
@@ -109,6 +119,7 @@ class ElasticSearchQuery
     }
   end
 
+  # returns range query
   def self.get_range_query field, from, to
     q = {
       :range=> {
@@ -120,20 +131,7 @@ class ElasticSearchQuery
     return q
   end
 
-  def self.get_nested_terms_filter_query(path, field, value, cache_flag = false)
-    raise "Cannot append terms query to #{value} which is not an array" unless value.is_a?(Array)
-    {
-      nested: {
-        path: path,
-        query: {
-          terms: {
-            field => value
-          }
-        }
-      }
-    }
-  end
-
+  # returns nested terms query
   def self.get_nested_terms_query(path, field, value)
     raise "Cannot append terms query to #{value} which is not an array" unless value.is_a?(Array)
     {
@@ -148,6 +146,7 @@ class ElasticSearchQuery
     }
   end
 
+  # returns basic bool structure with should, must and mus_not clause
   def self.get_bool_filter_structure
     {
       bool: {
@@ -158,6 +157,7 @@ class ElasticSearchQuery
     }
   end
 
+  # returns query bool structure
   def self.get_query_bool_structure
     {
       query:{
