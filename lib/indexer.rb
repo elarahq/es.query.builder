@@ -1,5 +1,6 @@
 # used to index data in realtime to Elastic Search
 require 'constants'
+require 'exceptions/document_not_found_exception'
 
 class Indexer
 	
@@ -32,7 +33,7 @@ class Indexer
 		if record_exists?(index_name, type_name, id, parent_id)
         @client.delete generate_options_hash(index_name, type_name, id, parent_id)
     else
-    	raise 'Record not Found'
+    	raise DocumentNotFoundException.new(index_name, type_name, id)
     end
 	end
 
