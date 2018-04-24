@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.email       = 'mohib.yousuf@hotmail.com'
   s.files       = Dir["lib/*"]
   s.license     = 'MIT'
-  s.homepage    = ''
+  s.homepage    = 'https://github.com/elarahq/es.query.builder'
   s.add_runtime_dependency 'rails', '~> 4.0', '>= 4.0.2'
-  s.add_runtime_dependency 'elasticsearch', '~> 5.0'
+  s.add_runtime_dependency 'elasticsearch'
 end
