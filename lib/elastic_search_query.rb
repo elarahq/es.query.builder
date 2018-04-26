@@ -60,14 +60,28 @@ class ElasticSearchQuery
     }
   end
 
-  # nested query structure
-  def self.get_nested_query_structure
-    {
+  def self.get_nested_query_structure path, score_mode=nil
+    raise ArgumentError.new("path has to be a string") unless (path.is_a? String)
+    subquery = {
       :nested => {
-        :path => "",
+        :path => path,
         :query => {}
       }
     }
+    if Constants::FUNCTION_SCORE_METHODS.include? score_mode
+      subquery[:nested][:score_mode] = score_mode
+    end
+    return subquery
+  end
+
+  # returns structure for match_phrase_prefix
+  def self.get_match_phrase_prefix_query field, prefix
+      raise ArgumentError.new("field and prefix should be strings") unless (field.is_a? String) && (prefix.is_a? String)
+      return {
+        :match_phrase_prefix => {
+          field => prefix
+        }
+      }
   end
 
   # term filter query

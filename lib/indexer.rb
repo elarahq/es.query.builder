@@ -1,6 +1,4 @@
-# used to index data in realtime to Elastic Search
-require 'constants'
-require 'exceptions/document_not_found_exception'
+# used to index data in almost realtime to Elastic Search
 
 class Indexer
 	
@@ -45,8 +43,6 @@ class Indexer
 	def delete_record(index_name, type_name, id, parent_id = nil)
 		if record_exists?(index_name, type_name, id, parent_id)
 			@client.delete generate_options_hash(index_name, type_name, id, parent_id)
-		else
-			raise DocumentNotFoundException.new(index_name, type_name, id)
 		end
 	end
 
