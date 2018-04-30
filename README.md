@@ -43,7 +43,7 @@ term_filter = ElasticSearchQuery.get_term_filter_query("name", "sample")
 bool_structure[:bool][:must] << term_filter
 main_query = {query: bool_structure}
 client = FetchEsData.new("localhost", "9200")
-response_code, body = client.fetch_shortlisted_data_from_es(main_query, "index_name", "type_name", extension = '_search')
+response_code, body = client.fetch_shortlisted_data_from_es(query: main_query, index_name: "index_name", type_name: "type_name", extension: '_search')
 ```
 
 > the response code and body (along with the related documents) are returned.
