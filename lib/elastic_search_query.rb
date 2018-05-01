@@ -51,21 +51,22 @@ class ElasticSearchQuery
 
   # With Elasticsearch 6.1 nested filter has been replaced with nested query
   # nested filter structure
-  def self.get_nested_filter_structure
+  def self.get_nested_filter_structure path, query = {}
     {
       :nested => {
-        :path => "",
-        :query => {}
+        :path => path,
+        :query => query
       }
     }
   end
 
-  def self.get_nested_query_structure path, score_mode=nil
+  # returns nested query structure
+  def self.get_nested_query_structure path, query = {}, score_mode=nil
     raise ArgumentError.new("path has to be a string") unless (path.is_a? String)
     subquery = {
       :nested => {
         :path => path,
-        :query => {}
+        :query => query
       }
     }
     if Constants::FUNCTION_SCORE_METHODS.include? score_mode
@@ -347,7 +348,7 @@ class ElasticSearchQuery
   # @param aggregation [Array] specifying aggregations
   # @param include_array [Array] specifying conditions on the field_name
   # @param script [Hash], to be executed for aggregation
-  def self.get_nested_terms_aggregation_structure name, field_name, aggregation, include_array = [], script = ""
+  def self.get_terms_structure_with_aggregation name, field_name, aggregation, include_array = [], script = ""
     query = get_terms_aggregation_structure name, field_name, include_array, script
     query[name][:aggs] = aggregation
     return query
