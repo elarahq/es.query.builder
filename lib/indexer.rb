@@ -50,10 +50,9 @@ class Indexer
   # @param new_index [String] name of the index(with timestamp)
   # @param alias name , name with which you refer to fetch index details
   # @param old_index_delete_flag, bool value to decide whether to keep last index or delete it
-  def self.switch_to_new_index(new_index, alias_name, old_index_delete_flag = true)
+  def switch_to_new_index(new_index, alias_name, old_index_delete_flag = true)
     begin
-      client = Buy::Indexer.default_client
-      result = client.indices.get_alias name: "#{alias_name}"
+      result = @client.indices.get_alias name: "#{alias_name}"
     rescue Exception => e
       puts "#{e.exception}"
       if e.class == Elasticsearch::Transport::Transport::Errors::NotFound
@@ -62,7 +61,6 @@ class Indexer
         raise NameError,"#{e}"
       end
     end
-
     unless result.nil?
       if result.keys.count > 1
         raise NameError,"Multiple indexes found for alias #{alias_name}"
@@ -70,16 +68,16 @@ class Indexer
         old_index = result.keys.first
         log_file = Logger.new("log/old_index.log")
         log_file.info("old_index - #{old_index}")
-        client.indices.update_aliases body: {
+        @client.indices.update_aliases body: {
               actions: [
                 { remove: { index: "#{old_index}", alias: "#{alias_name}" } },
                 { add:    { index: "#{new_index}", alias: "#{alias_name}" } }
               ]
             }
         if old_index_delete_flag
-            client.indices.delete index: "#{old_index}"
+            @client.indices.delete index: "#{old_index}"
         else
-            client.indices.close index: "#{old_index}"
+            @client.indices.close index: "#{old_index}"
         end
         message = old_index_delete_flag ? "index swapping done #{old_index} deleted and " : ""
         message += "#{new_index} created"
@@ -87,12 +85,12 @@ class Indexer
       end
     else
       ## checks if index exists with the name of alias itself and handles accordingly.
-      if client.indices.exists(index: "#{alias_name}") && old_index_delete_flag
-        client.indices.delete index: "#{alias_name}"
+      if @client.indices.exists(index: "#{alias_name}") && old_index_delete_flag
+        @client.indices.delete index: "#{alias_name}"
         puts "#{alias_name} index deleted"
       end
       puts "Alias #{alias_name} set for new index #{new_index} "
-      client.indices.put_alias index: "#{new_index}", name: "#{alias_name}"
+      @client.indices.put_alias index: "#{new_index}", name: "#{alias_name}"
     end
     puts "#{new_index} set up"
   end
