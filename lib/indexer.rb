@@ -37,7 +37,7 @@ class Indexer
   # deletes the record if  exists in the given index with given type and id,
   # raises DocumentNotFoundException if record is not found
   # @param index_name [String] name of the index
-  # @param index_name [String] name of the type
+  # @param index_type [String] name of the type
   # @param id [String] doc_id
   # @param parent_id [String] parent_id
   def delete_record(index_name, type_name, id, parent_id = nil)
@@ -93,6 +93,16 @@ class Indexer
       @client.indices.put_alias index: "#{new_index}", name: "#{alias_name}"
     end
     puts "#{new_index} set up"
+  end
+
+  #creates new index givem the mapping and settings in index_params_hash
+  # @param index_name [String] name of the index(with timestamp)
+  # @param index_type [String] name of the type
+  # @param index_params_hash, {settins:{},mappings:{}}
+  def create_index(index_name, index_type, index_params_hash)
+    @client.indices.create index: "#{index_name}",
+    type: "#{index_type}",
+    body: index_params_hash
   end
 
   private
