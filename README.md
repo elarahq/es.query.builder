@@ -61,6 +61,7 @@ indexer.bulk_index(data)
 
 # Author
 Mohib Yousuf @mohibyousuf / https://github.com/mohibyousuf
+Mohit Ojha @mohitrgiit / https://github.com/mohitrgiit
 
 # Full API Doc
 Please refer: 
