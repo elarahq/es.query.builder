@@ -3,7 +3,7 @@ A gem to build standard elastic search queries.
 
 ## Installation
 ```ruby
-gem 'housing_es_query_builder'
+gem 'es_query_builder'
 ```
 And then execute:
 
@@ -11,11 +11,11 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install housing_es_query_builder
+    $ gem install es_query_builder
 
 Require the gem in you application
 ```ruby
-require 'housing_es_query_builder'
+require 'es_query_builder'
 ```
 
 # Getting Started
@@ -61,6 +61,7 @@ indexer.bulk_index(data)
 
 # Author
 Mohib Yousuf @mohibyousuf / https://github.com/mohibyousuf
+Mohit Ojha @mohitrgiit / https://github.com/mohitrgiit
 
 # Full API Doc
 Please refer: 

@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
-  s.name        = 'housing.es.query.builder'
-  s.version     = '1.0.0'
+  s.name        = 'es_query_builder'
+  s.version     = '1.0.1'
   s.summary     = 'For Building Elastic Search Queries'
   s.authors     = ['Mohib Yousuf']
   s.email       = 'mohib.yousuf@hotmail.com'
