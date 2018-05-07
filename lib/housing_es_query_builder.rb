@@ -4,5 +4,5 @@ require 'fetch_es_data'
 require 'indexer'
 require 'constants'
 
-module HousingEsQueryBuilder
+module EsQueryBuilder
 end
