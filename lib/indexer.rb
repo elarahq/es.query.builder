@@ -46,7 +46,7 @@ class Indexer
     end
   end
 
-  #switches to new index ,will be used when doing bulk caching
+  # switches to new index ,will be used when doing bulk caching
   # @param new_index [String] name of the index(with timestamp)
   # @param alias name , name with which you refer to fetch index details
   # @param old_index_delete_flag, bool value to decide whether to keep last index or delete it
@@ -95,7 +95,7 @@ class Indexer
     puts "#{new_index} set up"
   end
 
-  #creates new index givem the mapping and settings in index_params_hash
+  # creates new index givem the mapping and settings in index_params_hash
   # @param index_name [String] name of the index(with timestamp)
   # @param index_type [String] name of the type
   # @param index_params_hash, {settins:{},mappings:{}}
