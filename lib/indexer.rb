@@ -18,7 +18,7 @@ class Indexer
     response = @client.bulk body: data
     response = response.with_indifferent_access
     if response[:errors] == true
-      raise "Not able to index with errors as #{(response["items"].map{|t| t["index"]["error"]}.compact)}"
+      raise "Not able to index with errors as #{(response["items"].map{|t| (t["index"] || t["update"])["error"]}.compact)}"
     end
   end
 
