@@ -439,8 +439,18 @@ class ElasticSearchQuery
   end
 
   # sets the max number of results to be returned by the query
+  # @param query [Hash] query to be modified
+  # @param size [integer] limit value
   def self.append_size_filter(query, size)
     query[:size] = size
+    query
+  end
+
+  # from filter sets the offset, from where the data is to be returned
+  # @param query [Hash] query to be modified
+  # @param from [integer] offset value
+  def self.append_from_filter(query, from)
+    query[:from] = from
     query
   end
 
