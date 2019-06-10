@@ -9,4 +9,5 @@ Gem::Specification.new do |s|
   s.homepage    = 'https://github.com/elarahq/es.query.builder'
   s.add_runtime_dependency 'rails', '~> 4.0', '>= 4.0.2'
   s.add_runtime_dependency 'elasticsearch'
+  s.add_runtime_dependency 'activesupport'
 end
