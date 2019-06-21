@@ -1,9 +1,8 @@
+require_relative 'score_function_builder'
 class WeightBuilder < ScoreFunctionBuilder
 
   NAME = 'weight'
   DEFAULT_WEIGHT = 1
-
-  # attr_reader :weight
 
   def initialize
     @weight = DEFAULT_WEIGHT

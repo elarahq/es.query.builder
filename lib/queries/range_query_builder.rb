@@ -1,4 +1,5 @@
 # Matches documents with fields that have terms within a certain range.
+require_relative 'query_builder'
 class RangeQueryBuilder < QueryBuilder
 
   NAME = "range"
@@ -39,7 +40,7 @@ class RangeQueryBuilder < QueryBuilder
   
   attr_reader :field_name
 
-  def initialize field_name
+  def initialize field_name: nil
     @field_name = field_name
     @gt= nil
     @gte= nil
@@ -66,6 +67,10 @@ class RangeQueryBuilder < QueryBuilder
     return query
   end
 
+# Returns field_name
+  def field_name_expr
+    return @field_name
+  end
 
 ########## Greater Than ##########
 # Returns gt

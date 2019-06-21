@@ -1,5 +1,8 @@
+require_relative 'abstract_query_builder'
+require_relative '../attributes_reader'
 class QueryBuilder
   include AbstractQueryBuilder
+  include AttributesReader
 
   # attr_accessor :boost
 

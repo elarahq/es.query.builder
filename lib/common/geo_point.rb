@@ -1,8 +1,7 @@
 class GeoPoint
+  include AttributesReader
 
-  attr_reader :lat, :lng, :latlng, :geo_hash
-
-  def initialize lat= nil, lng= nil, latlng= nil, geo_hash= nil
+  def initialize lat: nil, lng: nil, latlng: nil, geo_hash: nil
     if lat.present? and lng.present?
       @lat= lat.to_f
       @lng= lng.to_f
@@ -28,4 +27,21 @@ class GeoPoint
       return @geohash
     end
   end
+
+  def lat_expr
+    return @lat
+  end
+
+  def lng_expr
+    return @lng
+  end
+
+  def latlng_expr
+    return @latlng
+  end
+
+  def geo_hash_expr
+    return @geo_hash
+  end
+
 end

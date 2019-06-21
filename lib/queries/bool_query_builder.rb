@@ -1,3 +1,4 @@
+require_relative 'query_builder'
 class BoolQueryBuilder < QueryBuilder
   
   ADJUST_PURE_NEGATIVE_DEFAULT = true
@@ -34,14 +35,13 @@ class BoolQueryBuilder < QueryBuilder
   Gets the filter queries
 =end
   def filter_expr
-    return self.filter_queries
+    return @filter_queries
   end
 =begin
   Adds a filter query
 =end
   def filter query_builder
-    raise "Query in Filter clause cannot be nil" if query_builder.nil?
-    @filter_queries.append(query_builder)
+    query_builder.is_a?(array) ? @filter_queries += query_builder : @filter_queries.append(query_builder)
     return self
   end
 
@@ -54,14 +54,13 @@ class BoolQueryBuilder < QueryBuilder
   Gets the should queries
 =end
   def should_expr
-    return self.should_queries
+    return @should_queries
   end
 =begin
   Adds a should query
 =end
   def should query_builder
-    raise "Query in Should clause cannot be nil" if query_builder.nil?
-    @should_queries.append(query_builder)
+    query_builder.is_a?(Array) ? @should_queries += query_builder : @should_queries.append(query_builder)
     return self
   end
 
@@ -74,14 +73,13 @@ class BoolQueryBuilder < QueryBuilder
   Gets the must queries
 =end
   def must_expr
-    return self.must_queries
+    return @must_queries
   end
 =begin
   Adds a must query
 =end
   def must query_builder
-    raise "Query in Must clause cannot be nil" if query_builder.nil?
-    @must_queries.append(query_builder)
+    query_builder.is_a?(Array) ? @must_queries += query_builder : @must_queries.append(query_builder)
     return self
   end
 
@@ -94,14 +92,13 @@ class BoolQueryBuilder < QueryBuilder
   Gets the mustnot queries
 =end
   def must_not_expr
-    return self.mustnot_queries
+    return @mustnot_queries
   end
 =begin
   Adds a mustnot query
 =end
   def must_not query_builder
-    raise "Query in Must not clause cannot be nil" if query_builder.nil?
-    @mustnot_queries.append(query_builder)
+    query_builder.is_a?(Array) ? @mustnot_queries += query_builder : @mustnot_queries.append(query_builder)
     return self
   end
 

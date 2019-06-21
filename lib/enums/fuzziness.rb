@@ -1,14 +1,13 @@
 class Fuzziness
 
 # A unit class that encapsulates all in-exact search parsing and conversion from similarities to edit distances etc.
-  NAME = "fuzziness"
 
   AUTO = "AUTO"
   ZERO = 0
   ONE = 1
   TWO = 2
 
-  attr_reader: fuzziness
+  attr_reader :fuzziness
 
 # Returns a fuzziness object with maximum levenshtein distance as one.
   def self.zero
@@ -41,17 +40,8 @@ class Fuzziness
     return self.new("#{AUTO}:#{low},#{high}")
   end
 
-  def name
-    return NAME.intern
-  end
-
   def initialize(fuzziness_value)
     @fuzziness = fuzziness_value
-  end
-
-  def settings
-    settings = {}
-    settings[self.name] = @fuzziness
   end
 
 end

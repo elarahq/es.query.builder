@@ -2,6 +2,7 @@
   Nested query allows to query nested objects / docs (see nested mapping). The query is executed against the nested objects / docs 
   as if they were indexed as separate docs (they are, internally) and resulting in the root parent doc (or parent nested mapping).
 =end
+require_relative 'query_builder'
 class NestedQueryBuilder < QueryBuilder
 
   NAME = "nested"
@@ -17,7 +18,7 @@ class NestedQueryBuilder < QueryBuilder
 
   Any fields referenced inside the query must use the complete path (fully qualified)
 =end
-  def initialize path, inner_query, score_mode
+  def initialize path: nil, inner_query: nil, score_mode: nil
     @path = path
     @inner_query = query
     @score_mode = score_mode.score_mode
@@ -31,6 +32,21 @@ class NestedQueryBuilder < QueryBuilder
     nested_query[:score_mode] = @score_mode if @score_mode.present?
     query[name.intern] = nested_query
     return query
+  end
+
+# Returns path
+  def path_expr
+    return @path
+  end
+
+# Returns inner_query
+  def inner_query_expr
+    return @inner_query
+  end
+
+# Returns score_mode
+  def score_mode_expr
+    return @score_mode
   end
 
 end

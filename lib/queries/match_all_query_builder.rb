@@ -1,4 +1,5 @@
 # The most simple query, which matches all documents
+require_relative 'query_builder'
 class MatchAllQueryBuilder < QueryBuilder
 
   NAME = 'match_all'

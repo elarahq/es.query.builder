@@ -16,7 +16,7 @@ module AbstractQueryBuilder
   end
 
   def name
-    self.class::NAME
+    self.class::NAME.to_s
   end
 
   def wrap_query

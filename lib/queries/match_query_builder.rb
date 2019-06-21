@@ -1,3 +1,4 @@
+require_relative 'query_builder'
 class MatchQueryBuilder < QueryBuilder
 
 =begin
@@ -10,9 +11,7 @@ class MatchQueryBuilder < QueryBuilder
 
   NAME = "match"
 
-  attr_reader :field_name, :value
-
-  def initialize field, value
+  def initialize field_name: nil, value: nil
     @field_name = field
     @value = value
     @zero_terms_query = nil
@@ -42,10 +41,24 @@ class MatchQueryBuilder < QueryBuilder
     field_options[:fuzzy_transpositions] = @fuzzy_transpositions if @fuzzy_transpositions.present?
     field_options[:minimum_should_match] = @minimum_should_match if @minimum_should_match.present?
     field_options[:zero_terms_query] = @zero_terms_query if @zero_terms_query.present?
-    field_options.merge!(@fuzziness.settings) if @fuzziness.present?
-    match_query[@field_name.intern] = field_options
+    field_options[:fuzziness] = @fuzziness if @fuzziness.present?
+    match_query[@field_name.to_s.intern] = field_options
     query[name.intern] = match_query
     return query
+  end
+
+########## FIELD NAME ##########
+# Name of the field to be queried.
+# Returns field_name
+  def field_name_expr
+    return @field_name
+  end
+
+########## FIELD VALUE ##########
+# Value to be matched in that field in the documents
+# Returns value
+  def value_expr
+    return @value
   end
 
 ########## SEARCH ANALYZER ##########
@@ -98,7 +111,7 @@ class MatchQueryBuilder < QueryBuilder
   end
 # Sets fuzziness
   def fuzziness fuzziness
-    @fuzziness = fuzziness
+    @fuzziness = fuzziness.fuzziness
     return self
   end
 
@@ -161,8 +174,8 @@ class MatchQueryBuilder < QueryBuilder
   end
 # Sets zero_terms_query
 # Allowed Values: [ZeroTermsQuery.none, ZeroTermsQuery.all]
-  def zero_terms_query zero_terms_query_instance
-    @zero_terms_query = zero_terms_query_instance.zero_terms
+  def zero_terms_query zero_terms_query
+    @zero_terms_query = zero_terms_query.zero_terms
     return self
   end
 

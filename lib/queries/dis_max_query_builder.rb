@@ -1,3 +1,4 @@
+require_relative 'query_builder'
 class DisMaxQueryBuilder < QueryBuilder
 
   # attr_reader :queries, :tie_breaker

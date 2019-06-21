@@ -1,8 +1,7 @@
+require_relative 'score_function_builder'
 class ScriptScoreFunctionBuilder < ScoreFunctionBuilder
 
   NAME = 'script_score'
-
-  attr_reader :script
 
   def initialize script
     @script = script
@@ -14,6 +13,10 @@ class ScriptScoreFunctionBuilder < ScoreFunctionBuilder
     ss_query[:script] = script.query
     function[name.intern] = ss_query
     return function
+  end
+
+  def script_expr
+    return @script
   end
 
 end

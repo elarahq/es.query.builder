@@ -1,8 +1,7 @@
+require_relative 'score_function_builder'
 class RandomScoreFunctionBuilder < ScoreFunctionBuilder
 
   NAME = 'random_score'
-
-  # attr_reader :seed, :field
 
   def function
     function = {}

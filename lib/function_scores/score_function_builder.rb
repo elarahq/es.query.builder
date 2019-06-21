@@ -1,4 +1,5 @@
 class ScoreFunctionBuilder
+  include AttributesReader
 
   def function
     {}

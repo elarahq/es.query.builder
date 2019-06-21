@@ -1,23 +1,14 @@
+require_relative 'query_builder'
 class FunctionScoreQueryBuilder < QueryBuilder
 
   NAME = "function_score"
 
-  # attr_reader :function_query, :function_filters, :score_mode, :boost_mode, :max_boost, :min_score, :score_builder
+  # attr_reader :function_query, :filter_functions, :score_mode, :boost_mode, :max_boost, :min_score, :score_builder
 
-  def initialize *args
-    @function_filters = []
-    args.each do|arg|
-      case arg.class.to_s
-      when 'QueryBuilder'
-        @function_query = arg
-      when 'ScoreFunctionBuilder'
-        @score_builder = arg
-      when 'FunctionScoreQuerytBuilder::FilterFunctionBuilder'
-        @function_filters.append(arg)
-      else
-        raise "#{arg} is not a valid param for filter score query builder"
-      end
-    end
+  def initialize query: nil, score_function: nil, filter_functions: []
+    @function_query = query
+    @score_builder = score_function
+    @filter_functions = filter_functions
     @score_mode = nil
     @boost_mode = nil
     @max_boost = nil
@@ -27,8 +18,8 @@ class FunctionScoreQueryBuilder < QueryBuilder
   def query
     query = {}
     fs_query = self.common_query
-    fs_query[:query] = @function_query if @function_query.present?
-    fs_query[:functions] = @function_filters.map{|ff| ff.query} if @function_filters.present?
+    fs_query[:query] = @function_query.query if @function_query.present?
+    fs_query[:functions] = @filter_functions.map{|ff| ff.query} if @filter_functions.present?
     fs_query[:score_mode] = @score_mode if @score_mode.present?
     fs_query[:boost_mode] = @boost_mode if @boost_mode.present?
     fs_query[:max_boost] = @max_boost if @max_boost.present?
@@ -36,6 +27,24 @@ class FunctionScoreQueryBuilder < QueryBuilder
     fs_query.merge!(@score_builder.function) 
     query[name.intern] = fs_query
     return query
+  end
+
+########## Function Query ##########
+=begin
+  Query that specifies the documents to retrieve
+=end
+# Returns query
+  def query_expr
+    return @function_query
+  end
+
+########## Score Function ##########
+=begin
+  Function that defines how the documents will be scored.
+=end
+# Returns score_function
+  def score_function_expr
+    return @score_builder
   end
 
 ##########  BOOST MODE  #########################
@@ -58,13 +67,18 @@ class FunctionScoreQueryBuilder < QueryBuilder
 
 
 ########## FILTER FUNCTIONS ##########
-=begin
-  Returns the filters and functions
-=end
-  def filter_function_builders
-    return @function_filters
+# Returns the filters and functions
+  def filter_functions_expr
+    return @filter_functions
   end
 
+# Sets filter function/s to query
+  def filter_function filter: nil, score_function: nil, weight: nil
+    filter_function = self.class::FilterFunctionBuilder.new(filter: filter, score_function: score_function)
+    filter_function.weight(weight) if weight.present?
+    @filter_functions.append(filter_function)
+    return self
+  end
 
 ######### MAX BOOST ##########
 =begin
@@ -127,20 +141,12 @@ class FunctionScoreQueryBuilder < QueryBuilder
   Function to be associated with an optional filter, meaning it will be executed only for the documents that match the given filter.
 =end
   class FilterFunctionBuilder
-
+    include AttributesReader
     # attr_reader :filter, :score_builder, :weight
 
-    def initialize *args
-      args.each do |arg|
-        case arg.class.to_s
-        when 'QueryBuilder'
-          @filter = arg
-        when 'ScoreFunctionBuilder'
-          @score_builder = arg
-        else
-          raise "#{arg} is not a valid param for filter function builder"
-        end
-      end
+    def initialize filter: nil, score_function: nil
+      @filter = filter
+      @score_builder = score_function
     end
 
     def query
@@ -156,7 +162,7 @@ class FunctionScoreQueryBuilder < QueryBuilder
 =begin
     Returns filter query of the given filter function builder object.
 =end
-    def filter
+    def filter_expr
       return @filter
     end
 
@@ -165,7 +171,7 @@ class FunctionScoreQueryBuilder < QueryBuilder
 =begin
     Returns score function of the given filter function builder object.
 =end
-    def score_function
+    def score_function_expr
       return @score_builder
     end
 
@@ -185,7 +191,6 @@ class FunctionScoreQueryBuilder < QueryBuilder
     Sets the weight for the filter function.
 =end
     def weight value
-      raise Errors::NilError.new('Filter function weight') if value.nil?
       @weight = value.to_f
       return self
     end

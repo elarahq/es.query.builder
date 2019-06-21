@@ -1,4 +1,5 @@
 # Returns documents that contain a value other than null or [] in a provided field.
+require_relative 'query_builder'
 class ExistsQueryBuilder < QueryBuilder
 
   NAME = "exists"
@@ -9,8 +10,8 @@ class ExistsQueryBuilder < QueryBuilder
   @params:
     field_name: name of the field the existence of whose value is checked
 =end
-  def initialize field_name
-    @field_name  field_name
+  def initialize field_name: nil
+    @field_name= field_name
   end
 
   def query
@@ -19,6 +20,11 @@ class ExistsQueryBuilder < QueryBuilder
     exists_query[:field] = @field_name
     query[name.intern] = exists_query
     return query
+  end
+
+# Returns field_name
+  def field_name_expr
+    return @field_name
   end
   
 end
