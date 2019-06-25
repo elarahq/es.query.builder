@@ -37,10 +37,8 @@ class RangeQueryBuilder < QueryBuilder
       lte
         Less than or equal to the date rounded up: 2014-11-18||/M becomes 2014-11-30T23:59:59.999, ie including the entire month.
 =end
-  
-  attr_reader :field_name
 
-  def initialize field_name: nil
+  def initialize field_name:
     @field_name = field_name
     @gt= nil
     @gte= nil
@@ -67,83 +65,83 @@ class RangeQueryBuilder < QueryBuilder
     return query
   end
 
-# Returns field_name
+# returns field_name
   def field_name_expr
     return @field_name
   end
 
 ########## Greater Than ##########
-# Returns gt
+# returns gt
   def gt_expr
     return @gt
   end
-# Sets gt
+# sets gt
   def gt value
     @gt = value
     return self
   end
 
 ########## Greater Than Or Equal To ##########
-# Returns gte
+# returns gte
   def gte_expr
     return @gte
   end
-# Sets gte
+# sets gte
   def gte value
     @gte = value
     return self
   end
 
 ########## Less Than ##########
-# Return lt
+# return lt
   def lt_expr
     return @lt
   end
-# Sets lt
+# sets lt
   def lt value
     @lt = value
     return self
   end
 
 ########## Less Than Or Equal To ##########
-# Returns lte
+# returns lte
   def lte_expr
     return @lte
   end
-# Sets lte
+# sets lte
   def lte value
     @lte = value
     return self
   end
 
 ########## Format ##########
-# Returns format
+# returns format
   def format_expr
     return @format
   end
-# Sets format
+# sets format
   def format value
     @format = value
     return self
   end
 
 ########## Time Zone ##########
-# Returns time_zone
+# returns time_zone
   def time_zone_expr
     return @time_zone
   end
-# Sets time_zone
+# sets time_zone
   def time_zone value
     @time_zone = value
     return self
   end
 
 ########## RANGE RELATION ##########
-# Returns relation
+# returns relation
   def relation_expr
     return @relation
   end
-# Sets relation, input: ShapeRelation object
+# sets relation, input: ShapeRelation object
   def relation shape_relation
     @relation = shape_relation.relation
     return self

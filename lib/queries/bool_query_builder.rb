@@ -1,10 +1,21 @@
+=begin
+  A query that matches documents matching boolean combinations of other queries. The bool query maps to Lucene BooleanQuery.
+  It is built using one or more boolean clauses, each clause with a typed occurrence
+=end
 require_relative 'query_builder'
 class BoolQueryBuilder < QueryBuilder
   
   ADJUST_PURE_NEGATIVE_DEFAULT = true
   NAME = "bool"
 
-  # attr_reader :should_queries, :must_queries, :mustnot_queries, :filter_queries, :minimum_should_match
+=begin
+  @params:
+    should: queries that may appear in the matching documents and will contribute to scoring
+    must: queries that must appear in the matching documents and will contribute to scoring
+    must_not: queries that must not appear in the matching documents and will contribute to scoring
+    filter: queries that must appear in the matching documents but don't contribute to scoring
+    minimum_should_match: minimum should match as interger or percentage
+=end
 
   def initialize
     @should_queries = []
@@ -28,18 +39,11 @@ class BoolQueryBuilder < QueryBuilder
   end
 
 ########## FILTER QUERIES ##########
-=begin
-  Queries that must appear in the matching documents but don't contribute to scoring.
-=end
-=begin 
-  Gets the filter queries
-=end
+# gets the filter queries
   def filter_expr
     return @filter_queries
   end
-=begin
-  Adds a filter query
-=end
+# adds a filter query
   def filter query_builder
     query_builder.is_a?(array) ? @filter_queries += query_builder : @filter_queries.append(query_builder)
     return self
@@ -47,18 +51,11 @@ class BoolQueryBuilder < QueryBuilder
 
 
 ########## SHOULD QUERIES ##########
-=begin
-  Queries that may appear in the matching documents and will contribute to scoring.
-=end
-=begin
-  Gets the should queries
-=end
+# gets the should queries
   def should_expr
     return @should_queries
   end
-=begin
-  Adds a should query
-=end
+# adds a should query
   def should query_builder
     query_builder.is_a?(Array) ? @should_queries += query_builder : @should_queries.append(query_builder)
     return self
@@ -66,18 +63,11 @@ class BoolQueryBuilder < QueryBuilder
 
 
 ########## MUST QUERIES ##########
-=begin
-  Queries that must appear in the matching documents and will contribute to scoring.
-=end
-=begin
-  Gets the must queries
-=end
+# gets the must queries
   def must_expr
     return @must_queries
   end
-=begin
-  Adds a must query
-=end
+# adds a must query
   def must query_builder
     query_builder.is_a?(Array) ? @must_queries += query_builder : @must_queries.append(query_builder)
     return self
@@ -85,18 +75,11 @@ class BoolQueryBuilder < QueryBuilder
 
 
 ########## MUSTNOT QUERIES ##########
-=begin
-  Queries that must not appear in the matching documents and will contribute to scoring
-=end
-=begin
-  Gets the mustnot queries
-=end
+# gets the mustnot queries
   def must_not_expr
     return @mustnot_queries
   end
-=begin
-  Adds a mustnot query
-=end
+# adds a mustnot query
   def must_not query_builder
     query_builder.is_a?(Array) ? @mustnot_queries += query_builder : @mustnot_queries.append(query_builder)
     return self
@@ -104,18 +87,11 @@ class BoolQueryBuilder < QueryBuilder
 
 
 ########## MINIMUM SHOULD MATCH VALUE ##########
-=begin
-  Minimum Should match as interger or percentage
-=end
-=begin
-  Gets the minimumShouldMatch value
-=end
+# gets the minimumShouldMatch value
   def minimum_should_match_expr
     return @minimum_should_match
   end
-=begin
-  Sets the minimumShouldMatch value
-=end
+# sets the minimumShouldMatch value
   def minimum_should_match value
     raise "Minimum Should match cannot be nil" if value.nil?
     @minimum_should_match = value
@@ -124,9 +100,7 @@ class BoolQueryBuilder < QueryBuilder
 
 
 ########## HAS CLAUSES ##########
-=begin
-  Returns true iff this query builder has at least one should, must, must not or filter clause
-=end
+# returns true iff this query builder has at least one should, must, must not or filter clause
   def has_clauses?
     return !(@should_queries.nil? && @must_queries.nil? && @mustnot_queries.nil? && @filter_queries.nil?)
   end

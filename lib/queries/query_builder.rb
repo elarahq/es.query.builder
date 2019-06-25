@@ -4,20 +4,14 @@ class QueryBuilder
   include AbstractQueryBuilder
   include AttributesReader
 
-  # attr_accessor :boost
-
   NAME = 'base'
 
-=begin
-  Returns the boost for this query
-=end
+# returns the boost for this query
   def boost_expr
     return @boost
   end
 
-=begin
-  Sets the boost for this query
-=end
+# sets the boost for this query
   def boost value
     raise "boost value is nil" if value.nil?
     @boost = value

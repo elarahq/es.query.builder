@@ -1,13 +1,15 @@
+# A query that wraps a filter and simply returns a constant score equal to the query boost for every document in the filter.
 require_relative 'query_builder'
 class ConstantScoreQueryBuilder < QueryBuilder
 
   NAME = "constant_score"
 
 =begin
-  A query that wraps a filter and simply returns a constant score equal to the query boost for every document in the filter.
+  @params:
+    inner_query: query for whose matching documents constant score is to be set.
+    boost: boosting value
 =end
-  def initialize inner_query: nil
-    raise "Not A Query Object" unless inner_query.methods.include?(:query)
+  def initialize inner_query:
     @inner_query = inner_query
   end
 

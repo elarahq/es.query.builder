@@ -8,7 +8,13 @@ Dir[File.join(__dir__, 'enums', '*.rb')].each { |file| require file }
 Dir[File.join(__dir__, 'common', '*.rb')].each { |file| require file }
 Dir[File.join(__dir__, 'function_scores', '*.rb')].each { |file| require file }
 Dir[File.join(__dir__, 'queries', '*.rb')].each { |file| require file }
+Dir[File.join(__dir__, 'scripts', '*.rb')].each { |file| require file }
+Dir[File.join(__dir__, 'aggregations', 'helpers', '*.rb')].each { |file| require file }
+Dir[File.join(__dir__, 'aggregations', 'buckets', '*.rb')].each { |file| require file }
+Dir[File.join(__dir__, 'aggregations', 'metrics', '*.rb')].each { |file| require file }
 require_relative 'query_builders'
+require_relative 'enum_builders'
+Dir[File.join(__dir__, 'aggregation_builders.rb')].each { |file| require file }
 
 module EsQueryBuilder
 end

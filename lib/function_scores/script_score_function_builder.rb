@@ -3,14 +3,14 @@ class ScriptScoreFunctionBuilder < ScoreFunctionBuilder
 
   NAME = 'script_score'
 
-  def initialize script
+  def initialize script:
     @script = script
   end
 
   def function
     function = {}
     ss_query = super
-    ss_query[:script] = script.query
+    ss_query[:script] = script.get_script
     function[name.intern] = ss_query
     return function
   end

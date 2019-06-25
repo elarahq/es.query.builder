@@ -7,8 +7,12 @@ class TermQueryBuilder < QueryBuilder
 
   NAME = "term"
 
-# @params: field_name is name of the field in the document which is being queried, and value is being matched to the data in that field.
-  def initialize field_name: nil, value: nil
+=begin
+  @params: 
+    field_name: name of the field in the document which is being queried
+    value: is being matched to the data in that field.
+=end
+  def initialize field_name:, value: nil
     @field_name = field_name
     @value = value
   end
@@ -24,15 +28,13 @@ class TermQueryBuilder < QueryBuilder
   end
 
 ########## FIELD NAME ##########
-# Name of the field to be queried.
-# Returns field_name
+# returns field_name
   def field_name_expr
     return @field_name
   end
 
 ########## FIELD VALUE ##########
-# Value to be matched in that field in the documents
-# Returns value
+# returns value
   def value_expr
     return @value
   end

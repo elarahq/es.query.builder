@@ -10,7 +10,7 @@ class ExistsQueryBuilder < QueryBuilder
   @params:
     field_name: name of the field the existence of whose value is checked
 =end
-  def initialize field_name: nil
+  def initialize field_name:
     @field_name= field_name
   end
 
@@ -22,7 +22,7 @@ class ExistsQueryBuilder < QueryBuilder
     return query
   end
 
-# Returns field_name
+# returns field_name
   def field_name_expr
     return @field_name
   end

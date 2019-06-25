@@ -1,18 +1,31 @@
+# Match query is a query that analyzes the text and constructs a query as the result of the analysis.
 require_relative 'query_builder'
 class MatchQueryBuilder < QueryBuilder
-
-=begin
-  Match query is a query that analyzes the text and constructs a query as the result of the analysis.
-=end
 =begin
  @params: analyzer, auto_generate_synonyms_phrase_query, cutoff_frequency, field_name, fuzziness, fuzzy_transposition,
           lenient, max_expansions, minimum_should_match, operator, prefix_length, value, zero_terms_query
+    analyzer: analyzer to be used for this query
+    auto_generate_synonyms_phrase_query: The match query supports multi-terms synonym expansion with the synonym_graph token filter.
+                                         When this filter is used, the parser creates a phrase query for each multi-terms synonyms.
+                                         For example, the following synonym: "ny, new york" would produce:
+                                         (ny OR ("new york"))
+    cutoff_frequency: cutoff value in [0..1] (or absolute number >=1) representing the maximum threshold of a terms document frequency 
+                      to be considered a low frequency term.
+    field_name: name of the field to be queried
+    fuzziness: fuzziness used when evaluated to a fuzzy query type
+    fuzzy_transposition: fuzzy transpositions (ab → ba) are allowed by default but can be disabled by setting fuzzy_transpositions to false
+    max_expansions: max_expansions limit the number of matching docs that will be returned
+    minimum_should_match: minimum number of cases to match in case of or query
+    value: value to be matched in that field in the documents
+    zero_terms_query: If the analyzer used removes all tokens in a query like a stop filter does, the default behavior is to match no documents at all.
+                      In order to change that the zero_terms_query option can be used, which accepts none (default) and all which corresponds to a match_all query.
+    fuzzy_prefix_length: prefix length provides the number of characters from beginning that have to be exactly matched
 =end
 
   NAME = "match"
 
-  def initialize field_name: nil, value: nil
-    @field_name = field
+  def initialize field_name: , value: nil
+    @field_name = field_name
     @value = value
     @zero_terms_query = nil
     @analyzer = nil
@@ -48,26 +61,23 @@ class MatchQueryBuilder < QueryBuilder
   end
 
 ########## FIELD NAME ##########
-# Name of the field to be queried.
-# Returns field_name
+# returns field_name
   def field_name_expr
     return @field_name
   end
 
 ########## FIELD VALUE ##########
-# Value to be matched in that field in the documents
-# Returns value
+# returns value
   def value_expr
     return @value
   end
 
 ########## SEARCH ANALYZER ##########
-# Analyzer to be used for this query
-# Return Analyzer
+# return analyzer
   def analyzer_expr
     return @analyzer
   end
-# Sets Analyzer
+# sets analyzer
   def analyzer value
     @analyzer = value
     return self
@@ -75,12 +85,11 @@ class MatchQueryBuilder < QueryBuilder
 
 
 ########## AUTO GENERATE SYNONYMS PHRASE QUERY ##########
-
-# Returns auto_generate_synonyms_phrase_query
+# returns auto_generate_synonyms_phrase_query
   def auto_generate_synonyms_phrase_query_expr
     return @auto_generate_synonyms_phrase_query
   end
-# Sets auto_generate_synonyms_phrase_query
+# sets auto_generate_synonyms_phrase_query
   def auto_generate_synonyms_phrase_query value
     @auto_generate_synonyms_phrase_query = value
     return self
@@ -88,15 +97,11 @@ class MatchQueryBuilder < QueryBuilder
 
 
 ########## CUTOFF FREQUENCY ##########
-=begin
-  cutoff value in [0..1] (or absolute number >=1) representing the maximum threshold of a terms document frequency 
-  to be considered a low frequency term.
-=end
-# Returns cutoff_frequency
+# returns cutoff_frequency
   def cutoff_frequency_expr
     return @cutoff_frequency
   end
-# Sets cutoff_frequency
+# sets cutoff_frequency
   def cutoff_frequency value
     @cutoff_frequency = value
     return self
@@ -104,76 +109,66 @@ class MatchQueryBuilder < QueryBuilder
 
 
 ########## FUZZINESS VALUE ##########
-# fuzziness used when evaluated to a fuzzy query type
-# Returns fuzziness
+# returns fuzziness
   def fuzziness_expr
     return @fuzziness
   end
-# Sets fuzziness
+# sets fuzziness
   def fuzziness fuzziness
     @fuzziness = fuzziness.fuzziness
     return self
   end
 
 ########## PREFIX LENGTH ########
-# prefix length provides the number of characters from beginning that have to be exactly matched
-# Returns prefix_length
+# returns prefix_length
   def fuzzy_prefix_length_expr
     return @prefix_length
   end
-# Sets prefix_length
+# sets prefix_length
   def fuzzy_prefix_length value
     @prefix_length = value
     return self
   end
 
 ########## MAX EXPANSIONS ##########
-# max_expansions limit the number of matching docs that will be returned
-# Returns max_expansions
+# returns max_expansions
   def max_expansions_expr
     return @max_expansions
   end
-# Sets max_expansions
+# sets max_expansions
   def max_expansions value
     @max_expansions = value
     return self    
   end
 
 ########## FUZZY TRANSPOSITIONS ##########
-# Fuzzy transpositions (ab → ba) are allowed by default but can be disabled by setting fuzzy_transpositions to false.
-# Returns fuzzy_transpositions
+# returns fuzzy_transpositions
   def fuzzy_transpositions_expr
     return @fuzzy_transpositions
   end
-# Sets fuzzy_transpositions
+# sets fuzzy_transpositions
   def fuzzy_transpositions value
     @fuzzy_transpositions = value
     return self
   end
 
 ########## MINIMUM SHOULD ##########
-# minimum number of cases to match in case of or query
-# Returns minimum_should_match
+# returns minimum_should_match
   def minimum_should_match_expr
     return @minimum_should_match
   end
-# Sets minimum_should_match
+# sets minimum_should_match
   def minimum_should_match value
     @minimum_should_match = value
     return self
   end
 
 ########## ZERO TERMS ##########
-=begin 
-  If the analyzer used removes all tokens in a query like a stop filter does, the default behavior is to match no documents at all.
-  In order to change that the zero_terms_query option can be used, which accepts none (default) and all which corresponds to a match_all query.
-=end
-# Returns zero_terms_query
+# returns zero_terms_query
   def zero_terms_query_expr
     return @zero_terms_query
   end
-# Sets zero_terms_query
-# Allowed Values: [ZeroTermsQuery.none, ZeroTermsQuery.all]
+# sets zero_terms_query
   def zero_terms_query zero_terms_query
     @zero_terms_query = zero_terms_query.zero_terms
     return self

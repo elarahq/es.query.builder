@@ -7,7 +7,7 @@ class TermsLookup
   The _source field is enabled by default.
 =end
   
-  def initialize index, id, path
+  def initialize index:, id:, path:
     @index = index
     @id = id
     @path = path

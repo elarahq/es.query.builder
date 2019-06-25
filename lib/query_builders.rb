@@ -13,52 +13,56 @@
 
 class QueryBuilders
 
-	def self.bool_query
-		return BoolQueryBuilder.new
-	end
+  def self.base_query *args
+    return BaseQueryBuilder.new *args
+  end
 
-	def self.match_query *args
-		return MatchQueryBuilder.new *args
-	end
+  def self.bool_query
+    return BoolQueryBuilder.new
+  end
 
-	def self.term_query *args
-		return TermQueryBuilder.new *args
-	end
+  def self.match_query *args
+    return MatchQueryBuilder.new *args
+  end
 
-	def self.terms_query *args
-		return TermsQueryBuilder.new *args
-	end
+  def self.term_query *args
+    return TermQueryBuilder.new *args
+  end
 
-	def self.range_query *args
-		return RangeQueryBuilder.new *args
-	end
+  def self.terms_query *args
+    return TermsQueryBuilder.new *args
+  end
 
-	def self.exists_query *args
-		return ExistsQueryBuilder.new *args
-	end
+  def self.range_query *args
+    return RangeQueryBuilder.new *args
+  end
 
-	def self.constant_score_query *args
-		return ConstantScoreQueryBuilder.new *args
-	end
+  def self.exists_query *args
+    return ExistsQueryBuilder.new *args
+  end
 
-	def self.dis_max_query
-		return DisMaxQueryBuilder.new
-	end
+  def self.constant_score_query *args
+    return ConstantScoreQueryBuilder.new *args
+  end
 
-	def self.function_score_query *args
-		return FunctionScoreQueryBuilder.new *args
-	end
+  def self.dis_max_query
+    return DisMaxQueryBuilder.new
+  end
 
-	def self.nested_query *args
-		return NestedQueryBuilder.new *args
-	end
+  def self.function_score_query *args
+    return FunctionScoreQueryBuilder.new *args
+  end
 
-	def self.geo_distance_query
-		return GeoDistanceQueryBuilder.new
-	end
+  def self.nested_query *args
+    return NestedQueryBuilder.new *args
+  end
 
-	def self.match_all_query
-		return MatchAllQueryBuilder.new
-	end
+  def self.geo_distance_query
+    return GeoDistanceQueryBuilder.new
+  end
+
+  def self.match_all_query
+    return MatchAllQueryBuilder.new
+  end
 
 end

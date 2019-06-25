@@ -1,51 +1,47 @@
 class AggregationBuilders
 
   def self.terms name
-    return TermsAggregationBuilder.new(name)
+    return ::Aggregations::Buckets::TermsAggregationBuilder.new(name)
   end
 
   def self.filter name, filter
-    return FilterAggregationBuilder.new(name, filter)
-  end
-
-  def self.terms name
-    return TermsAggregationBuilder.new(name)
+    return ::Aggregations::Buckets::FilterAggregationBuilder.new(name, filter)
   end
 
   def self.geohash_grid name
-    return GeoGridAggregationBuilder.new(name)
+    return ::Aggregations::Buckets::GeoGridAggregationBuilder.new(name)
   end
 
   def self.top_hits name
-    return TopHitsAggregationBuilder.new(name)
+    return ::Aggregations::Buckets::TopHitsAggregationBuilder.new(name)
   end
 
   def self.nested name, path
-    return NestedAggregationBuilder.new(name, path)
+    return ::Aggregations::Buckets::NestedAggregationBuilder.new(name, path)
   end
 
   def self.reverse_nested name
-    return ReverseNestedAggregationBuilder.new(name)
+    return ::Aggregations::Buckets::ReverseNestedAggregationBuilder.new(name)
   end
 
   def self.date_histogram name
-    return DateHistogramAggregationBuilder.new(name)
+    return ::Aggregations::Buckets::DateHistogramAggregationBuilder.new(name)
   end
 
   def self.histogram name
-    return HistogramAggregationBuilder.new(name)
+    return ::Aggregations::Buckets::HistogramAggregationBuilder.new(name)
   end
 
   def self.date_range name
-    return DateRangeAggregationBuilder.new(name)
+    return ::Aggregations::Buckets::DateRangeAggregationBuilder.new(name)
   end
 
   def self.range name
-    return RangeAggregationBuilder.new(name)
+    return ::Aggregations::Buckets::RangeAggregationBuilder.new(name)
   end
 
   def self.max name
-    return MaxAggregationBuilder.new(name)
+    return ::Aggregations::Metrics::MaxAggregationBuilder.new(name)
   end
 
 end
