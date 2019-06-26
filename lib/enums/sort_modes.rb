@@ -1,17 +1,19 @@
-class SortModes
+module Enums
+  class SortModes
 
-  SORT_MODES = {min: 'min', max: 'max', sum: 'sum', avg: 'avg', median: 'median'}
+    SORT_MODES = {min: 'min', max: 'max', sum: 'sum', avg: 'avg', median: 'median'}
 
-  attr_reader :sort_mode
+    attr_reader :sort_mode
 
-  SORT_MODES.each do |sort_mode, es_value|
-    define_singleton_method(sort_mode) do
-      return self.new(es_value)
+    SORT_MODES.each do |sort_mode, es_value|
+      define_singleton_method(sort_mode) do
+        return self.new(es_value)
+      end
     end
-  end
 
-  def initialize sort_mode
-    @sort_mode = sort_mode
-  end
+    def initialize sort_mode
+      @sort_mode = sort_mode
+    end
 
+  end
 end

@@ -1,22 +1,24 @@
 require_relative 'score_function_builder'
-class ScriptScoreFunctionBuilder < ScoreFunctionBuilder
+module FunctionScores
+  class ScriptScoreFunctionBuilder < ScoreFunctionBuilder
 
-  NAME = 'script_score'
+    NAME = 'script_score'
 
-  def initialize script:
-    @script = script
+    def initialize script:
+      @script = script
+    end
+
+    def function
+      function = {}
+      ss_query = super
+      ss_query[:script] = script.get_script
+      function[name.intern] = ss_query
+      return function
+    end
+
+    def script_expr
+      return @script
+    end
+
   end
-
-  def function
-    function = {}
-    ss_query = super
-    ss_query[:script] = script.get_script
-    function[name.intern] = ss_query
-    return function
-  end
-
-  def script_expr
-    return @script
-  end
-
 end

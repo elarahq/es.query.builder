@@ -2,15 +2,15 @@
 class FunctionScoreBuilders
 
   def self.random_score_function
-    return RandomScoreFunctionBuilder.new
+    return FunctionScoreBuilders::RandomScoreFunctionBuilder.new
   end
 
   def self.script_score_function *args
-    return ScriptScoreFunctionBuilder.new *args
+    return FilterScoreBuilders::ScriptScoreFunctionBuilder.new *args
   end
 
   def self.weighted_score_function
-    return WeightedScoreFunctionBuilder.new
+    return FilterScoreBuilders::WeightedScoreFunctionBuilder.new
   end
   
 end
