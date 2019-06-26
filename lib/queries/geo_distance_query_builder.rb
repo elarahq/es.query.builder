@@ -83,7 +83,7 @@ class GeoDistanceQueryBuilder < QueryBuilder
 
 # Sets distance_type
   def distance_type distance_type
-    @distance_type = distance_type.geo_distance_type
+    @distance_type = distance_type.distance_type
     return self
   end
 
@@ -105,7 +105,7 @@ class GeoDistanceQueryBuilder < QueryBuilder
 
 # Sets validation_method
   def validation_method validation_method
-    @validation_method = validation_method.geo_validation_method
+    @validation_method = validation_method.validation_method
     return self
   end
 

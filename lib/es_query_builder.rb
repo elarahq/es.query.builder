@@ -3,6 +3,7 @@
 # require 'fetch_es_data'
 # require 'indexer'
 # require 'constants'
+require 'active_support/all'
 require_relative 'attributes_reader'
 Dir[File.join(__dir__, 'enums', '*.rb')].each { |file| require file }
 Dir[File.join(__dir__, 'common', '*.rb')].each { |file| require file }
