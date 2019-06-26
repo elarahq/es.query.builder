@@ -1,20 +1,17 @@
 class ZeroTermsQuery
 
-  attr_reader :zero_terms
+  attr_reader :zero_term
 
-  ALL = "all"
-  NONE = "none"
+  ZERO_TERMS_QUERY = {all: "all", none: "none"}
 
-  def self.all
-    return self.new(ALL)
+  ZERO_TERMS_QUERY.each do |zero_term_query, es_value|
+    define_singleton_method(zero_term_query) do
+      return self.new(es_value)
+    end
   end
 
-  def self.none
-    return self.new(NONE)
-  end
-
-  def initialize value
-    @zero_terms = value
+  def initialize zero_term
+    @zero_term = zero_term
   end
 
 end

@@ -4,9 +4,9 @@ class ValidationMethods
 
   attr_reader :validation_method
 
-  VALIDATION_METHODS.keys.each do |validation_method|
+  VALIDATION_METHODS.each do |validation_method, es_value|
     define_singleton_method(validation_method) do
-      self.new(VALIDATION_METHODS[validation_method])
+      self.new(es_value)
     end
   end
 

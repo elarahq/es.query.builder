@@ -4,14 +4,14 @@ class CombineFunctions
 
   attr_reader :combine_function
 
-  COMBINE_FUNCTIONS.keys.each do |fnctn|
-    define_singleton_method(fnctn) do
-      return self.new(COMBINE_FUNCTIONS[fnctn])
+  COMBINE_FUNCTIONS.each do |comb_fnctn, es_value|
+    define_singleton_method(comb_fnctn) do
+      return self.new(es_value)
     end
   end
 
-  def initialize value
-    @combine_function = value
+  def initialize combine_function
+    @combine_function = combine_function
   end
 
 end

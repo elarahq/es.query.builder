@@ -4,9 +4,9 @@ class DistanceUnits
 
   attr_reader :distance_unit
 
-  DISTANCE_UNITS.keys.each do |du|
+  DISTANCE_UNITS.each do |du, es_value|
     define_singleton_method(du) do
-      self.new(DISTANCE_UNITS[du])
+      self.new(es_value)
     end
   end
 

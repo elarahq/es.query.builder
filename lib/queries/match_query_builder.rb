@@ -170,7 +170,7 @@ class MatchQueryBuilder < QueryBuilder
   end
 # sets zero_terms_query
   def zero_terms_query zero_terms_query
-    @zero_terms_query = zero_terms_query.zero_terms
+    @zero_terms_query = zero_terms_query.zero_term
     return self
   end
 

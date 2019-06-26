@@ -4,9 +4,9 @@ class ScriptSortTypes
 
   attr_reader :script_sort_type
 
-  SCRIPT_SORT_TYPES.keys.each do |script_type|
+  SCRIPT_SORT_TYPES.each do |script_type, es_value|
     define_singleton_method(script_type) do
-      return self.new(SCRIPT_SORT_TYPES[script_type])
+      return self.new(es_value)
     end
   end
 

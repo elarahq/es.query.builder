@@ -4,14 +4,14 @@ class ScoreModes
 
   attr_reader :score_mode
 
-  SCORE_MODES.keys.each do |sc_md|
+  SCORE_MODES.each do |sc_md, es_value|
     define_singleton_method(sc_md) do
-      return self.new(SCORE_MODES[sc_md])
+      return self.new(es_value)
     end
   end
 
-  def initialize value
-    @score_mode = value
+  def initialize score_mode
+    @score_mode = score_mode
   end
   
 end
