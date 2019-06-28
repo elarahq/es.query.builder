@@ -13,7 +13,7 @@ module Aggregations
       end
 
       # @param [String] field
-      # @return [calling class object]
+      # @return [ValuesSourceAggregationHelper]
       def field field
         @field = field
         self
@@ -24,20 +24,20 @@ module Aggregations
         @field
       end
 
-      # @param [Script] script
-      # @return [calling class object]
+      # @param [Misc::Script] script
+      # @return [ValuesSourceAggregationHelper]
       def script script
-        @script = script.get_script
+        @script = script.settings
         self
       end
 
-      # @return [Script]
+      # @return [Misc::Script]
       def script_expr
         @script
       end
 
       # @param [String]
-      # @return [calling class object]
+      # @return [ValuesSourceAggregationHelper]
       def missing missing
         @missing = missing
         self

@@ -1,7 +1,7 @@
  module Enums 
   class SortOrders
 
-    SORT_ORDERS = {asc: "asc", desc: "desc"}
+    SORT_ORDERS = {:asc => :asc, :desc => :desc}
 
     attr_reader :sort_order
 

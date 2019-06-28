@@ -1,15 +1,18 @@
 module Aggregations
   module Buckets
+    # Elasticsearch GeoHash grid Aggregation
     class GeoGridAggregationBuilder
 
       include ::Aggregations::Helpers::ValuesSourceAggregationHelper
       include ::Aggregations::Helpers::AbstractAggregationHelper
       include ::Aggregations::Helpers::AggregationQueryBuilderHelper
+      include ::AttributesReader
 
       ATTRIBUTES = [:size, :precision]
 
-      def initialize name
-        @name = name.to_sym
+      # @param [String] name : Aggregation name
+      def initialize name:
+        @name = name.intern
         @type = :geohash_grid
         @query = {
           @name => {
@@ -18,21 +21,27 @@ module Aggregations
         }
       end
 
+      # @param [Integer] size
+      # @return [GeoGridAggregationBuilder]
       def size size
         @size = size
         self
       end
 
-      def get_size
+      # @return [Integer]
+      def size_expr
         @size
       end
 
+      # @param [Integer] precision
+      # @return [GeoGridAggregationBuilder]
       def precision precision
         @precision = precision
         self
       end
 
-      def get_precision
+      # @return [Integer]
+      def precision_expr
         @precision
       end
       

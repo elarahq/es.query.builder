@@ -1,6 +1,6 @@
 module Aggregations
   module Buckets
-    # A multi-bucket value source based aggregation where buckets are dynamically built - one per unique value.
+    # Elasticsearch Terms Aggregation
     class TermsAggregationBuilder
 
       include ::Aggregations::Helpers::ValuesSourceAggregationHelper
@@ -12,7 +12,7 @@ module Aggregations
 
       # @param [String] name : Aggregation name
       def initialize name:
-        @name = name.to_sym
+        @name = name.intern
         @type = :terms
         @query = {
           @name => {
@@ -33,13 +33,11 @@ module Aggregations
         @size
       end
 
-      # @param [String] field
-      # @param [Symbol] order : (:asc/:desc), defaults to :desc.
+      # @param [Misc::BucketOrder] bucket_order
       # @return [TermsAggregationBuilder], can be chained for ordering on multiple fields.
-      def add_order field, order=:desc
-        order = (order.to_sym == :asc) ? :asc : :desc
+      def add_order bucket_order
         @order ||= []
-        @order << {field.to_sym => order}
+        @order << bucket_order.settings
         self
       end
 

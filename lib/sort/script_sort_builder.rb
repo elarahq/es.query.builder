@@ -23,7 +23,7 @@ module Sort
     def query
       query = {}
       script_query = self.common_query
-      script_query[:script] = @script.get_script
+      script_query[:script] = @script.settings
       script_query[:type] = @type
       script_query[:nested] = @nested_sort.query if @nested_sort.present?
       script_sort[:sort_mode] = @sort_mode if @sort_mode.present?
