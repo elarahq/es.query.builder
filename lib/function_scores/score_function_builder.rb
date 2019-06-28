@@ -1,15 +1,15 @@
-class ScoreFunctionBuilder
-  include AttributesReader
+module FunctionScores  
+  class ScoreFunctionBuilder
+    include AttributesReader
 
-  def function
-    {}
+    def function
+      {}
+    end
+
+  # The name of this score function.
+    def name
+      return self.class::NAME
+    end
+
   end
-
-=begin
-  The name of this score function.
-=end
-  def name
-    return self.class::NAME
-  end
-
 end
