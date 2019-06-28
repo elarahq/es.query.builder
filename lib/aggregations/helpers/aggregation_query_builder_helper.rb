@@ -1,16 +1,20 @@
+# A helper module for aggregations, builds aggregation query from attributes.
 module Aggregations
   module Helpers
     module AggregationQueryBuilderHelper
 
-      def get_name
+      # @return [String] : Aggregation name
+      def name_expr
         @name
       end
 
-      def get_type
+      # @return [String] : Aggregation type
+      def type_expr
         @type
       end
 
-      def get_query
+      # @return [Hash] : Aggregation query
+      def query_expr
         add_value_source_agg_builder if self.class.included_modules.include?(ValuesSourceAggregationHelper)
         add_abstract_agg_builder if self.class.included_modules.include?(AbstractAggregationHelper)
         add_abstract_range_builder if self.class.included_modules.include?(AbstractRangeHelper)
@@ -18,6 +22,8 @@ module Aggregations
         @query
       end
 
+      private
+      
       def add_value_source_agg_builder
         @query[@name][@type].merge!(value_source_agg_builder)
       end

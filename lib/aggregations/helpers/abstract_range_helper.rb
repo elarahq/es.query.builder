@@ -1,8 +1,9 @@
+# A helper module for aggregations, defines ranges, keyed attributes.
 module Aggregations
   module Helpers
     module AbstractRangeHelper
 
-
+      # helper method to add abstract range attributes to aggregation.
       def abstract_range_builder
         builder = {}
         builder[:ranges] = @ranges if @ranges.present?
@@ -10,7 +11,11 @@ module Aggregations
         builder
       end
 
-      def add_range from, to, key=''
+      # @param [String] from
+      # @param [String] to
+      # @param [String] key
+      # @return [calling class object]
+      def add_range from: nil, to: nil, key: ''
         @ranges ||= []
         range = {}
         range[:key] = key if key.present?
