@@ -1,15 +1,18 @@
 module Aggregations
   module Buckets
+    # Elasticsearch Date Histogram Aggregation
     class DateHistogramAggregationBuilder
 
       include ::Aggregations::Helpers::ValuesSourceAggregationHelper
       include ::Aggregations::Helpers::AbstractAggregationHelper
       include ::Aggregations::Helpers::AggregationQueryBuilderHelper
+      include ::AttributesReader
 
-      ATTRIBUTES = [:order, :interval, :min_doc_count]
+      ATTRIBUTES = [:order, :calendar_interval, :min_doc_count]
 
-      def initialize name
-        @name = name.to_sym
+      # @param [String] name : Aggregation name
+      def initialize name:
+        @name = name.intern
         @type = :date_histogram
         @query = {
           @name => {
@@ -18,31 +21,40 @@ module Aggregations
         }
       end
 
-      def add_order field, order=:desc
+      # @param [Misc::BucketOrder] bucket_order
+      # @return [DateHistogramAggregationBuilder], can be chained for ordering on multiple fields.
+      def add_order bucket_order
         @order ||= []
-        @order << {field => order}
+        @order << bucket_order.settings
         self
       end
 
-      def get_order
+      # @return [Array]
+      def order_expr
         @order
       end
 
-      def interval interval
-        @interval = interval
+      # @param [String] interval
+      # @return [DateHistogramAggregationBuilder]
+      def calendar_interval interval
+        @calendar_interval = interval
         self
       end
 
-      def get_interval
-        @interval
+      # @return [String]
+      def calendar_interval_expr
+        @calendar_interval
       end
 
+      # @param [Integer] doc_count
+      # @return [DateHistogramAggregationBuilder]
       def min_doc_count doc_count
         @min_doc_count = doc_count
         self
       end
 
-      def get_min_doc_count
+      # @return [Integer]
+      def min_doc_count_expr
         @min_doc_count
       end
 

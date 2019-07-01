@@ -1,8 +1,9 @@
+# A helper module for aggregations, defines ranges, keyed attributes.
 module Aggregations
   module Helpers
     module AbstractRangeHelper
 
-
+      # helper method to add abstract range attributes to aggregation.
       def abstract_range_builder
         builder = {}
         builder[:ranges] = @ranges if @ranges.present?
@@ -10,26 +11,27 @@ module Aggregations
         builder
       end
 
-      def add_range from, to, key=''
+      # @param [Misc::Range] range
+      # @return [calling class object], can be chained for adding multiple ranges.
+      def add_range range
         @ranges ||= []
-        range = {}
-        range[:key] = key if key.present?
-        range[:from] = from if from.present?
-        range[:to] = to if to.present?
-        @ranges << range if range.present?
+        @ranges << range.settings
         self
       end
 
-      def get_ranges
+      # @return [Array]
+      def ranges_expr
         @ranges
       end
 
+      # @param [Boolean] keyed
       def keyed keyed
         @keyed = keyed
         self
       end
 
-      def get_keyed
+      # @return [Boolean]
+      def keyed_expr
         @keyed
       end
 

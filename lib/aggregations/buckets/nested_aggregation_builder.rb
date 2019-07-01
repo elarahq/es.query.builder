@@ -1,12 +1,16 @@
 module Aggregations
   module Buckets
+    # Elasticsearch Nested Aggregation
     class NestedAggregationBuilder
 
       include ::Aggregations::Helpers::AbstractAggregationHelper
       include ::Aggregations::Helpers::AggregationQueryBuilderHelper
+      include ::AttributesReader
 
-      def initialize name, path
-        @name = name.to_sym
+      # @param [String] name : Aggregation name
+      # @param [String] path
+      def initialize name:, path:
+        @name = name.intern
         @type = :nested
         @path = path
         @query = {
@@ -18,7 +22,8 @@ module Aggregations
         }
       end
 
-      def get_path
+      # @return [String]
+      def path_expr
         @path
       end
 
