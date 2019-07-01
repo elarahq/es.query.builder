@@ -1,27 +1,47 @@
- module Enums 
+# frozen_string_literal: true
+
+module Enums
+  # Enum class representing the relationship
+  # between a Query / Filter Shape
+  # and indexed Shapes that will be used to determine
+  # if a Document should be matched or not
   class ShapeRelations
-
+    # @!visibility protected
     WITHIN = 'within'
+    # @!visibility protected
     CONTAINS = 'contains'
+    # @!visibility protected
     INTERSECTS = 'intersects'
-
+    # @!visibility protected
     attr_reader :relation
 
+    # @!scope class
+    # @!method number
+    # @return [ShapeRelations] ShapeRelations object
+    #   corresponding to elasticsearch option of 'within'
     def self.within
-      return self.new(WITHIN)
+      new(WITHIN)
     end
 
+    # @!scope class
+    # @!method number
+    # @return [ShapeRelations] ShapeRelations object
+    #   corresponding to elasticsearch option of 'contains'
     def self.contains
-      return self.new(CONTAINS)
+      new(CONTAINS)
     end
 
+    # @!scope class
+    # @!method number
+    # @return [ShapeRelations] ShapeRelations object
+    #   corresponding to elasticsearch option of 'intersects'
     def self.intersects
-      return self.new(INTERSECTS)
+      new(INTERSECTS)
     end
 
-    def initialize value
+    # @!visibility protected
+    def initialize(value)
       @relation = value
     end
-
   end
 end

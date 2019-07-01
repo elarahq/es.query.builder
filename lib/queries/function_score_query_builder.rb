@@ -57,8 +57,8 @@ module Queries
       return @boostmode
     end
   # sets the Boost mode for the query.
-    def boostmode boostmode
-      @boost_mode = boostmode.combine_function
+    def boostmode combine_function
+      @boost_mode = combine_function.combine_function
       return self
     end
 
