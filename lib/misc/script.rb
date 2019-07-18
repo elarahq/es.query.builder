@@ -1,13 +1,18 @@
+# frozen_string_literal: true
+
 module Misc
+  # Script represents used-defined input that can be used to compile and
+  # execute a script from the ScriptService based on the ScriptType.
   class Script
     include AttributesReader
 
     # @param [String] id_or_code
     # @param [Hash] params
-    # @param [Enums::ScriptTypes] type : Enums::ScriptTypes.(inline|stored), defaults to Enums::ScriptTypes.inline
+    # @param [Enums::ScriptTypes] type : Enums::ScriptTypes.(inline|stored),
+    #   defaults to Enums::ScriptTypes.inline
     # @param [String] lang
     # @param [Hash] options
-    def initialize id_or_code:, params: {}, type: Enums::ScriptTypes.inline, lang: 'painless', options: {}
+    def initialize(id_or_code:, params: {}, type: Enums::ScriptTypes.inline, lang: 'painless', options: {})
       @id_or_code = id_or_code
       @params = params
       @type = type.script_type
@@ -53,6 +58,5 @@ module Misc
     def options_expr
       @options
     end
-
   end
 end

@@ -1,31 +1,32 @@
-# A query that wraps a filter and simply returns a constant score equal to the query boost for every document in the filter.
+# frozen_string_literal: true
+
 require_relative 'query_builder'
 module Queries
+  # A query that wraps a filter and simply returns a constant score
+  # equal to the query boost for every document in the filter.
   class ConstantScoreQueryBuilder < QueryBuilder
+    NAME = 'constant_score'
 
-    NAME = "constant_score"
-
-=begin
-    @params:
-      inner_query: query for whose matching documents constant score is to be set.
-      boost: boosting value
-=end
-    def initialize inner_query:
+    # @params [QueryBuilder] inner_query query for whose
+    #   matching documents constant score is to be set
+    # @params [Numeric] boost boosting value
+    def initialize(inner_query:)
       @inner_query = inner_query
     end
 
+    # @return [Hash] serialized json query for the object
     def query
       query = {}
-      cs_query = self.common_query
-      cs_query.merge!(@inner_query.query) if @inner_query.present?
+      cs_query = common_query
+      cs_query[:filter] = @inner_query.query if @inner_query.present?
       query[name.intern] = cs_query
-      return query
+      query
     end
 
-  # Returns inner_query
+    # Returns inner_query
+    # @!visibility protected
     def inner_query_expr
-      return @inner_query
+      @inner_query
     end
-
   end
 end

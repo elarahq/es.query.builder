@@ -1,15 +1,19 @@
-module FunctionScores  
+# frozen_string_literal: true
+
+module FunctionScores
+  # Base class for function score builder classes
   class ScoreFunctionBuilder
     include AttributesReader
 
+    # @return [Hash] serialized json query for the object
     def function
       {}
     end
 
-  # The name of this score function.
+    # Elasticsearch key for the score function class.
+    # @return [String] es key for the score function class
     def name
-      return self.class::NAME
+      self.class::NAME
     end
-
   end
 end
