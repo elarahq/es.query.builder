@@ -52,7 +52,7 @@ module Queries
     # @return [BoolQueryBuilder] modified self
     # adds a filter query
     def filter(query_builder)
-      if query_builder.is_a?(array)
+      if query_builder.is_a?(Array)
         @filter_queries += query_builder
       else
         @filter_queries.append(query_builder)
