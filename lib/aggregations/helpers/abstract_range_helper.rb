@@ -12,7 +12,7 @@ module Aggregations
       end
 
       # @param [Misc::Range] range
-      # @return [calling class object], can be chained for adding multiple ranges.
+      # @return [AbstractRangeHelper], can be chained for adding multiple ranges.
       def add_range range
         @ranges ||= []
         @ranges << range.settings

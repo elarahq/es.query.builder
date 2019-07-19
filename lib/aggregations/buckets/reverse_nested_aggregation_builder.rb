@@ -1,12 +1,15 @@
 module Aggregations
   module Buckets
+    # Elasticsearch Reverse Nested Aggregation
     class ReverseNestedAggregationBuilder
 
       include ::Aggregations::Helpers::AbstractAggregationHelper
       include ::Aggregations::Helpers::AggregationQueryBuilderHelper
+      include ::AttributesReader
 
-      def initialize name
-        @name = name.to_sym
+      # @param [String] name : Aggregation name
+      def initialize name:
+        @name = name.intern
         @type = :reverse_nested
         @query = {
           @name => {

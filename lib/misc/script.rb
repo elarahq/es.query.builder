@@ -10,7 +10,7 @@ module Misc
     def initialize id_or_code:, params: {}, type: Enums::ScriptTypes.inline, lang: 'painless', options: {}
       @id_or_code = id_or_code
       @params = params
-      @type = type.script_type
+      @type = type
       @lang = lang
       @options = options
     end
@@ -18,7 +18,7 @@ module Misc
     # return [Hash]
     def settings
       settings = {}
-      if @type == Enums::ScriptTypes.inline.script_type
+      if @type.script_type == Enums::ScriptTypes.inline.script_type
         settings[:source] = @id_or_code
       else
         settings[:id] = @id_or_code

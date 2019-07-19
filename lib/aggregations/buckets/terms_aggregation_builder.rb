@@ -37,7 +37,7 @@ module Aggregations
       # @return [TermsAggregationBuilder], can be chained for ordering on multiple fields.
       def add_order bucket_order
         @order ||= []
-        @order << bucket_order.settings
+        @order << bucket_order
         self
       end
 

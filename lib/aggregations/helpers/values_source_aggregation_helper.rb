@@ -7,7 +7,7 @@ module Aggregations
       def value_source_agg_builder
         builder = {}
         builder[:field] = @field
-        builder[:script] = @script if @script.present?
+        builder[:script] = @script.settings if @script.present?
         builder[:missing] = @missing if @missing.present?
         builder
       end
@@ -27,7 +27,7 @@ module Aggregations
       # @param [Misc::Script] script
       # @return [ValuesSourceAggregationHelper]
       def script script
-        @script = script.settings
+        @script = script
         self
       end
 

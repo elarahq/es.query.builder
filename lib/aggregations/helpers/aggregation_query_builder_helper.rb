@@ -3,18 +3,21 @@ module Aggregations
   module Helpers
     module AggregationQueryBuilderHelper
 
+      OBJECT_ARRAY_SETTINGS_FIELDS = [:order]
+      OBJECT_ARRAY_QUERY_FIELDS = [:sort]
+
       # @return [String] : Aggregation name
       def name_expr
-        @name
+        @name.to_s
       end
 
       # @return [String] : Aggregation type
       def type_expr
-        @type
+        @type.to_s
       end
 
       # @return [Hash] : Aggregation query
-      def query_expr
+      def query
         add_value_source_agg_builder if self.class.included_modules.include?(ValuesSourceAggregationHelper)
         add_abstract_agg_builder if self.class.included_modules.include?(AbstractAggregationHelper)
         add_abstract_range_builder if self.class.included_modules.include?(AbstractRangeHelper)
@@ -31,7 +34,15 @@ module Aggregations
       def add_class_attributes
         "#{self.class.name}::ATTRIBUTES".constantize.each do |attr|
           attr_inst = instance_variable_get("@#{attr.to_s}")
-          @query[@name][@type][attr] = attr_inst if attr_inst.present?
+          if attr_inst.present?
+            if OBJECT_ARRAY_SETTINGS_FIELDS.include?(attr)
+              @query[@name][@type][attr] = attr_inst.map{|obj| obj.settings}
+            elsif OBJECT_ARRAY_QUERY_FIELDS.include?(attr)
+              @query[@name][@type][attr] = attr_inst.map{|obj| obj.query}
+            else
+              @query[@name][@type][attr] = attr_inst
+            end
+          end
         end
       end
 

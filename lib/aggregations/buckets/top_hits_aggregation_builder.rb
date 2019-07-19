@@ -36,7 +36,7 @@ module Aggregations
       # @return [TopHitsAggregationBuilder]
       def add_sort sort
         @sort ||= []
-        @sort << sort.query
+        @sort << sort
         self
       end
 
