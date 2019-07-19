@@ -22,7 +22,7 @@ module Queries
 =end
     def initialize field_name:, values: []
       @field_name = field_name
-      if values.is_a?(TermsLookup)
+      if values.is_a?(Misc::TermsLookup)
         @terms_lookup = values
       else
         @values = values.is_a?(Array) ? values : values.split(',')
