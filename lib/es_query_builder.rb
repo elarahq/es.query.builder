@@ -9,6 +9,7 @@ require_relative 'attributes_reader'
 Dir[File.join(__dir__, 'enums', '*.rb')].each { |file| require file }
 Dir[File.join(__dir__, 'common', '*.rb')].each { |file| require file }
 Dir[File.join(__dir__, 'function_scores', '*.rb')].each { |file| require file }
+Dir[File.join(__dir__, 'misc', '*.rb')].each { |file| require file }
 Dir[File.join(__dir__, 'queries', '*.rb')].each { |file| require file }
 Dir[File.join(__dir__, 'scripts', '*.rb')].each { |file| require file }
 Dir[File.join(__dir__, 'sort', '*.rb')].each { |file| require file }

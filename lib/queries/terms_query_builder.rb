@@ -22,7 +22,7 @@ module Queries
 =end
     def initialize field_name:, values: []
       @field_name = field_name
-      if values.is_a?(TermsLookup)
+      if values.is_a?(Misc::TermsLookup)
         @terms_lookup = values
       else
         @values = values.is_a?(Array) ? values : values.split(',')
@@ -32,7 +32,7 @@ module Queries
     def query
       query = {}
       terms_query = self.common_query
-      terms_query[@field_name.intern] = values if @values.present?
+      terms_query[@field_name.intern] = @values if @values.present?
       terms_query[@field_name.intern] = @terms_lookup.settings if @terms_lookup.present?
       query[name.intern] = terms_query
       return query
