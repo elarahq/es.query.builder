@@ -4,7 +4,7 @@ class SearchSourceBuilder
 
   def initialize
     @query = nil
-    @aggregation = nil
+    @aggregations = {}
     @sort = []
     @source = []
     @size = nil
@@ -43,12 +43,12 @@ class SearchSourceBuilder
   end
 
 # returns aggregation
-  def aggregation_expr
-    return @aggregation
+  def aggregations_expr
+    return @aggregations
   end
 # sets aggregation
-  def aggregation aggregation
-    @aggregation = aggregation
+  def aggregation aggregations
+    @aggregations.merge!(aggregations)
     return self
   end
 
