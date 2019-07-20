@@ -4,7 +4,7 @@ class SearchSourceBuilder
 
   def initialize
     @query = nil
-    @aggregations = {}
+    @aggregations = []
     @sort = []
     @source = []
     @size = nil
@@ -19,7 +19,7 @@ class SearchSourceBuilder
   def body
     body = {}
     body[:query] = @query.query
-    body[:aggregations] = @aggregations.query if @aggregations.present?
+    body[:aggregations] = @aggregations.map{|agg| agg.query}.reduce({}, :merge) if @aggregations.present?
     body[:sort] = @sort.map{|sort_object| sort_object.query} if @sort.present?
     body[:_source] = @source
     body[:size] = @size
@@ -47,8 +47,12 @@ class SearchSourceBuilder
     return @aggregations
   end
 # sets aggregation
-  def aggregation aggregations
-    @aggregations.merge!(aggregations)
+  def aggregations agg_builder
+    if agg_builder.is_a?(Array)
+      @aggregations += agg_builder
+    else
+      @aggregations.append(agg_builder)
+    end
     return self
   end
 
