@@ -25,6 +25,8 @@ module Aggregations
         @query
       end
 
+      alias_method :query_expr, :query
+
       private
       
       def add_value_source_agg_builder
