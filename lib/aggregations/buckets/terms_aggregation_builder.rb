@@ -11,7 +11,7 @@ module Aggregations
       ATTRIBUTES = [:size, :order, :include, :exclude, :min_doc_count]
 
       # @param [String] name : Aggregation name
-      def initialize name
+      def initialize name:
         @name = name.intern
         @type = :terms
         @query = {
