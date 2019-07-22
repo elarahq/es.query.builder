@@ -21,8 +21,8 @@ module Queries
 =end
     def initialize path:, inner_query:, score_mode: nil
       @path = path
-      @inner_query = query
-      @score_mode = score_mode.score_mode
+      @inner_query = inner_query
+      @score_mode = score_mode.score_mode if score_mode.present?
     end
 
     def query
