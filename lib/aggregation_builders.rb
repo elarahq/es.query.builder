@@ -1,47 +1,47 @@
 class AggregationBuilders
 
-  def self.terms name
-    return ::Aggregations::Buckets::TermsAggregationBuilder.new(name)
+  def self.terms(*args)
+    return ::Aggregations::Buckets::TermsAggregationBuilder.new(*args)
   end
 
-  def self.filter name, filter
-    return ::Aggregations::Buckets::FilterAggregationBuilder.new(name, filter)
+  def self.filter(*args)
+    return ::Aggregations::Buckets::FilterAggregationBuilder.new(*args)
   end
 
-  def self.geohash_grid name
-    return ::Aggregations::Buckets::GeoGridAggregationBuilder.new(name)
+  def self.geohash_grid(*args)
+    return ::Aggregations::Buckets::GeoGridAggregationBuilder.new(*args)
   end
 
-  def self.top_hits name
-    return ::Aggregations::Buckets::TopHitsAggregationBuilder.new(name)
+  def self.top_hits(*args)
+    return ::Aggregations::Buckets::TopHitsAggregationBuilder.new(*args)
   end
 
-  def self.nested name, path
-    return ::Aggregations::Buckets::NestedAggregationBuilder.new(name, path)
+  def self.nested(*args)
+    return ::Aggregations::Buckets::NestedAggregationBuilder.new(*args)
   end
 
-  def self.reverse_nested name
-    return ::Aggregations::Buckets::ReverseNestedAggregationBuilder.new(name)
+  def self.reverse_nested(*args)
+    return ::Aggregations::Buckets::ReverseNestedAggregationBuilder.new(*args)
   end
 
-  def self.date_histogram name
-    return ::Aggregations::Buckets::DateHistogramAggregationBuilder.new(name)
+  def self.date_histogram(*args)
+    return ::Aggregations::Buckets::DateHistogramAggregationBuilder.new(*args)
   end
 
-  def self.histogram name
-    return ::Aggregations::Buckets::HistogramAggregationBuilder.new(name)
+  def self.histogram(*args)
+    return ::Aggregations::Buckets::HistogramAggregationBuilder.new(*args)
   end
 
-  def self.date_range name
-    return ::Aggregations::Buckets::DateRangeAggregationBuilder.new(name)
+  def self.date_range(*args)
+    return ::Aggregations::Buckets::DateRangeAggregationBuilder.new(*args)
   end
 
-  def self.range name
-    return ::Aggregations::Buckets::RangeAggregationBuilder.new(name)
+  def self.range(*args)
+    return ::Aggregations::Buckets::RangeAggregationBuilder.new(*args)
   end
 
-  def self.max name
-    return ::Aggregations::Metrics::MaxAggregationBuilder.new(name)
+  def self.max(*args)
+    return ::Aggregations::Metrics::MaxAggregationBuilder.new(*args)
   end
 
 end
