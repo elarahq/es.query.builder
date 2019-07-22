@@ -5,7 +5,8 @@ class AggregationBuilders
   end
 
   def self.filter name, filter
-    return ::Aggregations::Buckets::FilterAggregationBuilder.new(name, filter)
+    return ::Aggregations::Buckets::FilterAggregationBuilder.new(name: name,
+                                                                 filter: filter)
   end
 
   def self.geohash_grid name
@@ -17,7 +18,8 @@ class AggregationBuilders
   end
 
   def self.nested name, path
-    return ::Aggregations::Buckets::NestedAggregationBuilder.new(name, path)
+    return ::Aggregations::Buckets::NestedAggregationBuilder.new(name: name,
+                                                                 path: path)
   end
 
   def self.reverse_nested name
