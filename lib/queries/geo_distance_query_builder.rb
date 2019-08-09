@@ -53,6 +53,7 @@ module Queries
   # Sets point
     def point point
       @point = point
+      return self
     end
 
   # Returns field_name
