@@ -73,7 +73,7 @@ module Queries
   # Sets distance and distance_unit
     def distance distance, distance_unit= nil
       @distance = distance
-      @distance_unit = distance_unit.distance_unit if @distance_unit.present?
+      @distance_unit = distance_unit.distance_unit if distance_unit.present?
       return self
     end
 
