@@ -35,7 +35,7 @@ module Queries
     def query
       query = {}
       geo_query = self.common_query
-      geo_query[:field_name] = @point.settings
+      geo_query[@field_name] = @point.settings
       geo_query[:distance] = @distance.to_s + @distance_unit.to_s
       geo_query[:distance_type] = @distance_type
       geo_query[:writable_name] = @writable_name
