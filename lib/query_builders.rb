@@ -93,8 +93,8 @@ class QueryBuilders
   #   field on which exists query to be performed
   # @return [Queries::GeoDistanceQueryBuilder]
   #   geo_distance_query_builder object
-  def self.geo_distance_query
-    Queries::GeoDistanceQueryBuilder.new
+  def self.geo_distance_query(*args)
+    Queries::GeoDistanceQueryBuilder.new(*args)
   end
 
   # @return [Queries::MAtchAllQueryBuilder]
