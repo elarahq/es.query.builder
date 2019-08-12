@@ -35,7 +35,7 @@ module Sort
     def query
       query = {}
       go_query = self.common_query
-      go_query["#{@field_name}.location".intern] = @point.settings
+      go_query[@field_name.to_s.intern] = @point.settings
       go_query[:distance_type] = @distance_type if @distance_type.present?
       go_query[:unit] = @distance_unit if @distance_unit.present?
       go_query[:nested] = @nested_sort.query if @nested_sort.present?
