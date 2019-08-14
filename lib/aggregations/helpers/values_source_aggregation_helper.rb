@@ -6,7 +6,7 @@ module Aggregations
       # helper method to add values source attributes to aggregation.
       def value_source_agg_builder
         builder = {}
-        builder[:field] = @field
+        builder[:field] = @field if @field.present?
         builder[:script] = @script.settings if @script.present?
         builder[:missing] = @missing if @missing.present?
         builder
