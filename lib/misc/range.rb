@@ -17,9 +17,9 @@ module Misc
     # return [Hash] serialized json query for object
     def settings
       settings = {}
-      settings[:key] = key if key.present?
-      settings[:from] = from if from.present?
-      settings[:to] = to if to.present?
+      settings[:key] = @key if @key.present?
+      settings[:from] = @from if @from.present?
+      settings[:to] = @to if @to.present?
       settings
     end
 
