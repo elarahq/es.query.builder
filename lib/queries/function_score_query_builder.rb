@@ -15,12 +15,12 @@ module Queries
       score_function: function that defines how the documents will be scored
 =end
 
-    def initialize query: nil, score_function: nil, filter_functions: []
+    def initialize query: nil, score_function: nil, filter_functions: [], boost_mode: nil
       @function_query = query
       @score_builder = score_function
       @filter_functions = filter_functions
       @score_mode = nil
-      @boost_mode = nil
+      @boost_mode = boost_mode
       @max_boost = nil
       @min_score = nil
     end
