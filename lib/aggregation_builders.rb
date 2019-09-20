@@ -44,4 +44,8 @@ class AggregationBuilders
     return ::Aggregations::Metrics::MaxAggregationBuilder.new(*args)
   end
 
+  def self.min(*args)
+    return ::Aggregations::Metrics::MinAggregationBuilder.new(*args)
+  end
+
 end
