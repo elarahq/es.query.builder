@@ -48,4 +48,8 @@ class AggregationBuilders
     return ::Aggregations::Metrics::MinAggregationBuilder.new(*args)
   end
 
+  def self.avg(*args)
+    return ::Aggregations::Metrics::AvgAggregationBuilder.new(*args)
+  end
+
 end
