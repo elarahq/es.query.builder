@@ -8,6 +8,10 @@ class AggregationBuilders
     return ::Aggregations::Buckets::FilterAggregationBuilder.new(*args)
   end
 
+  def self.filters(*args)
+    return ::Aggregations::Buckets::FiltersAggregationBuilder.new(*args)
+  end
+
   def self.geohash_grid(*args)
     return ::Aggregations::Buckets::GeoGridAggregationBuilder.new(*args)
   end
