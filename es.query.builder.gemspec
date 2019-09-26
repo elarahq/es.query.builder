@@ -2,8 +2,8 @@ Gem::Specification.new do |s|
   s.name        = 'es_query_builder'
   s.version     = '1.0.4'
   s.summary     = 'For Building Elastic Search Queries'
-  s.authors     = ['Mohib Yousuf', 'Anurag Agrawal', 'Supantha Samanta']
-  s.email       = ['mohib.yousuf@hotmail.com', 'anuragagrawal117@gmail.com', 'supantha.samanta@gmail.com']
+  s.authors     = ['Mohib Yousuf', 'Anurag Agrawal', 'Supantha Samanta', 'Neeraj Joshi']
+  s.email       = ['mohib.yousuf@hotmail.com', 'anuragagrawal117@gmail.com', 'supantha.samanta@gmail.com', 'neerajjoshi00@gmail.com']
   s.files       = Dir["lib/*"]
   s.license     = 'MIT'
   s.homepage    = 'https://github.com/elarahq/es.query.builder'

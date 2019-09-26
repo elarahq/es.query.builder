@@ -17,7 +17,7 @@ module FunctionScores
     def function
       function = {}
       ss_query = super
-      ss_query[:script] = script.settings
+      ss_query[:script] = @script.settings
       function[name.intern] = ss_query
       function
     end
