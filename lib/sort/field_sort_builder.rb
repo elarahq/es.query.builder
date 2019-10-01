@@ -12,7 +12,7 @@ module Sort
     def query
       query = {}
       field_query = self.common_query
-      field_query[:mode] = @mode if @mode.present?
+      field_query[:mode] = @sort_mode if @sort_mode.present?
       field_query[:missing] = @missing if @missing.present?
       field_query[:unmapped_type] = @unmapped_type if @unmapped_type.present?
       field_query[:nested] = @nested_sort.query if @nested_sort.present?
