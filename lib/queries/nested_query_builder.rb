@@ -19,17 +19,18 @@ module Queries
 
     Any fields referenced inside the query must use the complete path (fully qualified)
 =end
-    def initialize path:, inner_query:, score_mode: nil
+    def initialize path:, inner_query:, score_mode: nil, type: :query
       @path = path
       @inner_query = inner_query
       @score_mode = score_mode.score_mode if score_mode.present?
+      @type = type
     end
 
     def query
       query = {}
       nested_query = self.common_query
       nested_query[:path] = @path if @path.present?
-      nested_query[:query] = @inner_query.query if @inner_query.present?
+      nested_query[@type] = @inner_query.query if @inner_query.present?
       nested_query[:score_mode] = @score_mode if @score_mode.present?
       query[name.intern] = nested_query
       return query

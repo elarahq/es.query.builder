@@ -12,10 +12,10 @@ module Sort
     def query
       query = {}
       field_query = self.common_query
-      field_query[:mode] = @mode if @mode.present?
+      field_query[:mode] = @sort_mode if @sort_mode.present?
       field_query[:missing] = @missing if @missing.present?
       field_query[:unmapped_type] = @unmapped_type if @unmapped_type.present?
-      field_query[:nested] = @nested_sort.query if @nested_sort.present?
+      field_query[:nested] = @nested_sort.query[:nested] if @nested_sort.present?
       query[@field_name.intern] = field_query
       return query
     end
@@ -31,6 +31,7 @@ module Sort
     end
   # sets nested_sort
     def nested_sort nested_sort
+      raise ArgumentError.new("pass a nested query object") if nested_sort.name != "nested"
       @nested_sort = nested_sort
       return self
     end
