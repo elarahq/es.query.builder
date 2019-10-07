@@ -1,10 +1,10 @@
 Gem::Specification.new do |s|
   s.name        = 'es_query_builder'
-  s.version     = '2.0.0'
+  s.version     = '2.0.1'
   s.summary     = 'For Building Elastic Search Queries'
   s.authors     = ['Mohib Yousuf', 'Anurag Agrawal', 'Supantha Samanta', 'Neeraj Joshi']
   s.email       = ['mohib.yousuf@hotmail.com', 'anuragagrawal117@gmail.com', 'supantha.samanta@gmail.com', 'neerajjoshi00@gmail.com']
-  s.files       = Dir["lib/*"]
+  s.files       = Dir["lib/**/*.rb"]
   s.license     = 'MIT'
   s.homepage    = 'https://github.com/elarahq/es.query.builder'
   s.add_runtime_dependency 'rails', '~> 4.0', '>= 4.0.2'
