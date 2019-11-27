@@ -14,6 +14,7 @@ class SearchSourceBuilder
     @terminate_after = nil
     @timeout = nil
     @version = nil
+    @script = nil
   end
 
   def body
@@ -29,6 +30,7 @@ class SearchSourceBuilder
     body[:terminate_after] = @terminate_after
     body[:timeout] = @timeout
     body[:version] = @version
+    body[:script] = @script.settings
     return body.compact
   end
 
@@ -146,6 +148,17 @@ class SearchSourceBuilder
   def version version
     @version = version
     return self
+  end
+
+# sets script
+  def script script
+    @script = script
+    return self
+  end
+
+# returns script
+  def script_expr
+    return @script
   end
 
 end
