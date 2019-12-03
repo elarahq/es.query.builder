@@ -30,7 +30,7 @@ class SearchSourceBuilder
     body[:terminate_after] = @terminate_after
     body[:timeout] = @timeout
     body[:version] = @version
-    body[:script] = @script.settings
+    body[:script] = @script.settings if @script.present?
     return body.compact
   end
 
