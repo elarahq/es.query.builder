@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'es_query_builder'
-  s.version     = '2.0.3'
+  s.version     = '2.0.4'
   s.summary     = 'For Building Elastic Search Queries'
   s.authors     = ['Mohib Yousuf', 'Anurag Agrawal', 'Supantha Samanta', 'Neeraj Joshi']
   s.email       = ['mohib.yousuf@hotmail.com', 'anuragagrawal117@gmail.com', 'supantha.samanta@gmail.com', 'neerajjoshi00@gmail.com']
