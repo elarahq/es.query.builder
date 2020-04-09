@@ -7,6 +7,7 @@ class SearchSourceBuilder
     @aggregations = []
     @sort = []
     @source = []
+    @_source = {}
     @size = nil
     @explain = nil
     @from = nil
@@ -22,7 +23,7 @@ class SearchSourceBuilder
     body[:query] = @query.query
     body[:aggregations] = @aggregations.map{|agg| agg.query}.reduce({}, :merge) if @aggregations.present?
     body[:sort] = @sort.map{|sort_object| sort_object.query} if @sort.present?
-    body[:_source] = @source
+    body[:_source] = @_source.presence || @source
     body[:size] = @size
     body[:explain] = @explain
     body[:from] = @from
@@ -79,6 +80,32 @@ class SearchSourceBuilder
     source_field.is_a?(Array) ? @source+= source_field : @source.append(source_field)
     return self
   end
+
+# returns source_fields
+  def source_include_expr
+    return [] unless @_source[:include].present?
+    @_source[:include]
+  end
+
+  def source_exclude_expr
+    return [] unless @_source[:exclude].present?
+    @_source[:exclude]
+  end
+
+# sets source include fields
+  def source_include(include_list)
+    @_source[:include] = [] if @_source[:include].blank?
+    include_list.is_a?(Array) ? (@_source[:include] += include_list) : @_source[:include].append(include_list)
+    self
+  end
+
+# sets source exclude fields
+  def source_exclude(exclude_list)
+    @_source[:exclude] = [] if @_source[:exclude].blank?
+    exclude_list.is_a?(Array) ? (@_source[:exclude] += exclude_list) : @_source[:exclude].append(exclude_list)
+    self
+  end
+  
 
 # returns size
   def size_expr
