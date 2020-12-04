@@ -26,7 +26,6 @@ module Queries
       @point = nil
       @distance = nil
       @distance_unit = DEFAULT_DISTANCE_UNIT.distance_unit
-      @type = nil
       @writable_name = nil
       @validation_method = nil
       @ignore_unmapped = nil

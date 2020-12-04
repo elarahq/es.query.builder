@@ -67,7 +67,7 @@ module Misc
       pi = 3.14159
       deg_to_rad =  pi/180
       lat_in_rad = @lat * deg_to_rad
-      lon_in_rad = @lon * deg_to_rad
+      lon_in_rad = @lng * deg_to_rad
       delta_rad = @radius/radius_of_earth
       ne_coordinates = {
           latitude: (lat_in_rad + delta_rad)/ deg_to_rad,
