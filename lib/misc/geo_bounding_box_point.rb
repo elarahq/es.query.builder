@@ -63,8 +63,8 @@ module Misc
     end
 
     def get_coordinates
-      radius_of_earth = 6378.1
-      pi = 3.14159
+      radius_of_earth = Constants::RADIUS_OF_EARTH
+      pi = Math::PI
       deg_to_rad =  pi/180
       lat_in_rad = @lat * deg_to_rad
       lon_in_rad = @lng * deg_to_rad
