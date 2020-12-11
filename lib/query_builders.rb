@@ -102,4 +102,13 @@ class QueryBuilders
   def self.match_all_query
     Queries::MatchAllQueryBuilder.new
   end
+
+  # @params [String] field_name
+  #   field on which exists query to be performed
+  # @return [Queries::GeoDistanceQueryBuilder]
+  #   geo_bounding_box_query_builder object
+  def self.geo_bounding_box_query(*args)
+    Queries::GeoBoundingBoxQueryBuilder.new(*args)
+  end
+
 end
