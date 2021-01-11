@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 require_relative '../constants'
+
 module Misc
   # Point Class
   class GeoBoundingBoxPoint
