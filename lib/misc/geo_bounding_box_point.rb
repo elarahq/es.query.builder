@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-require_relative 'misc_constants'
+require_relative '../constants'
 module Misc
   # Point Class
   class GeoBoundingBoxPoint
@@ -63,7 +63,7 @@ module Misc
     end
 
     def get_coordinates
-      radius_of_earth = MiscConstants::RADIUS_OF_EARTH
+      radius_of_earth = Constants::RADIUS_OF_EARTH
       pi = Math::PI
       deg_to_rad =  pi/180
       lat_in_rad = @lat * deg_to_rad
